@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# htun-kyaw — portfolio
 
-## Getting Started
+Personal portfolio of **Htun Kyaw**, Senior Full Stack Developer (Laravel · Vue · React · Odoo-connected enterprise systems).
 
-First, run the development server:
+Designed as a code editor, based on the [Portfolio for Developers Concept V.2](https://www.figma.com/design/B41zi0BpgS6nm54S85bU7B/Portfolio-for-Developers-Concept-V.2.1--Community-) Figma community file: explorer sidebars, editor tabs, line-numbered "files", and a playable snake game on the landing page.
+
+## Stack
+
+- **Next.js 16** (App Router, fully static — every route is prerendered)
+- **React 19**, **TypeScript**
+- **Tailwind CSS v4** — design tokens live in `app/globals.css` under `@theme`
+- **Fira Code**, self-hosted via `next/font/local` (no request to Google at runtime)
+- `react-icons`, `clsx` — nothing else at runtime
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
+npm run start    # serve the build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Node 20+.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/                       routes
+  page.tsx                 _hello — intro, stats, snake game
+  about-me/                _about-me — experience, bio, education, tech stack
+  projects/                _projects — filterable list
+  projects/[slug]/         project detail + per-project share image
+  contact-me/              _contact-me — form (opens the visitor's mail client)
+  opengraph-image.tsx      generated share image
+  icon.tsx, apple-icon.tsx generated favicons
+  sitemap.ts, robots.ts, manifest.ts
+components/
+  layout/                  Frame, Header, Footer
+  ui/                      Button, Sidebar, SidebarSection, TabBar, CodeBlock, SocialIcon
+  seo/                     JSON-LD (schema.org Person)
+  hello/ about/ projects/ contact/   page-specific components
+data/                      ALL content — edit these to update the site
+  site.ts                  name, role, availability, contacts, stats, nav
+  experience.ts            bio, roles, domain knowledge, education, certifications, hobbies
+  projects.ts              projects (type "archive" = hidden unless filtered)
+  technos.ts               tech stack by category
+  about.ts                 builds the about-me folder tree from the above
+lib/                       fonts, SEO + share-image helpers, cn()
+types/                     shared TypeScript types
+assets/                    self-hosted font; TTFs + photo used by generated images
+public/                    photo, resume PDF, project screenshots
+```
 
-## Learn More
+## Updating content
 
-To learn more about Next.js, take a look at the following resources:
+- **New project** — add an entry at the top of `data/projects.ts`. Put a screenshot at `public/projects/<slug>.webp` and set `image`; without one a generated cover is shown. A detail page and share image are created automatically.
+- **Job change / availability** — `data/experience.ts` and `site.availability` in `data/site.ts`.
+- **Resume** — replace `public/Htun-Kyaw_Resume.pdf`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Any static-capable Next.js host works; Vercel is the simplest.
 
-## Deploy on Vercel
+Set the public URL so canonical links, the sitemap and share images point at the right domain:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+NEXT_PUBLIC_SITE_URL=https://www.htunkyaw.optionenter.com
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+(That value is also the default when the variable is unset.)

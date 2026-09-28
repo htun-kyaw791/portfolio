@@ -1,0 +1,32 @@
+"use client";
+
+import { useState } from "react";
+import { IoMdArrowDropdown } from "react-icons/io";
+import { cn } from "@/lib/cn";
+
+/** Collapsible sidebar group, e.g. "▾ personal-info". */
+export default function SidebarSection({
+  title,
+  defaultOpen = true,
+  children,
+}: {
+  title: string;
+  defaultOpen?: boolean;
+  children: React.ReactNode;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
+
+  return (
+    <section className="border-b border-line">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className="flex w-full items-center gap-3 border-b border-line bg-line/40 px-4 py-2 text-white md:bg-transparent"
+      >
+        <IoMdArrowDropdown className={cn("text-xl transition-transform", !open && "-rotate-90")} />
+        {title}
+      </button>
+      {open && <div className="px-4 py-3">{children}</div>}
+    </section>
+  );
+}
