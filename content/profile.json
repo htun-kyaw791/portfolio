@@ -1,0 +1,45 @@
+{
+  "name": "Htun Kyaw",
+  "handle": "htun-kyaw",
+  "role": "Senior Full Stack Developer",
+  "availability": "Open to senior / lead full stack roles — remote or Yangon",
+  "summary": "Senior Full Stack Developer and technical lead building scalable Laravel, Vue, React, Node, and Odoo-connected enterprise systems.",
+  "location": "Yangon, Myanmar",
+  "email": "htunkyaw.791481@gmail.com",
+  "phone": "+95 9 772 481 290",
+  "github": "https://github.com/htun-kyaw791",
+  "linkedin": "https://www.linkedin.com/in/htun-kyaw/",
+  "gitlab": "https://gitlab.com/my-projects3800633",
+  "photo": "/profile/photo.jpg",
+  "resume": "/profile/resume.pdf",
+  "stats": [
+    {
+      "value": "5+",
+      "label": "years building"
+    },
+    {
+      "value": "3K",
+      "label": "daily active users"
+    },
+    {
+      "value": "20+",
+      "label": "sites maintained"
+    },
+    {
+      "value": "5+",
+      "label": "core platforms"
+    }
+  ],
+  "keywords": [
+    "Htun Kyaw",
+    "Senior Full Stack Developer",
+    "Senior Web Developer",
+    "Laravel Developer",
+    "Vue.js Developer",
+    "React Developer",
+    "Next.js",
+    "Odoo Integration",
+    "Myanmar Web Developer",
+    "Yangon"
+  ]
+}

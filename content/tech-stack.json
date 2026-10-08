@@ -1,0 +1,304 @@
+{
+  "technos": [
+    {
+      "title": "JavaScript",
+      "type": "language",
+      "url": "https://developer.mozilla.org/docs/Web/JavaScript"
+    },
+    {
+      "title": "TypeScript",
+      "type": "language",
+      "url": "https://www.typescriptlang.org/"
+    },
+    {
+      "title": "PHP",
+      "type": "language",
+      "url": "https://www.php.net/"
+    },
+    {
+      "title": "Python",
+      "type": "language",
+      "url": "https://www.python.org/"
+    },
+    {
+      "title": "HTML",
+      "type": "language",
+      "url": "https://developer.mozilla.org/docs/Web/HTML"
+    },
+    {
+      "title": "CSS",
+      "type": "language",
+      "url": "https://developer.mozilla.org/docs/Web/CSS"
+    },
+    {
+      "title": "C",
+      "type": "language",
+      "url": "https://www.cprogramming.com/"
+    },
+    {
+      "title": "C#",
+      "type": "language",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+    },
+    {
+      "title": "Kotlin",
+      "type": "language",
+      "url": "https://kotlinlang.org/"
+    },
+    {
+      "title": "Laravel",
+      "type": "framework",
+      "url": "https://laravel.com/"
+    },
+    {
+      "title": "Vue.js",
+      "type": "framework",
+      "url": "https://vuejs.org/"
+    },
+    {
+      "title": "Nuxt.js",
+      "type": "framework",
+      "url": "https://nuxt.com/"
+    },
+    {
+      "title": "React",
+      "type": "framework",
+      "url": "https://react.dev/"
+    },
+    {
+      "title": "Next.js",
+      "type": "framework",
+      "url": "https://nextjs.org/"
+    },
+    {
+      "title": "Node.js",
+      "type": "framework",
+      "url": "https://nodejs.org/"
+    },
+    {
+      "title": "FastAPI",
+      "type": "framework",
+      "url": "https://fastapi.tiangolo.com/"
+    },
+    {
+      "title": "CodeIgniter",
+      "type": "framework",
+      "url": "https://www.codeigniter.com/"
+    },
+    {
+      "title": ".NET",
+      "type": "framework",
+      "url": "https://dotnet.microsoft.com/"
+    },
+    {
+      "title": "Tailwind CSS",
+      "type": "library",
+      "url": "https://tailwindcss.com/"
+    },
+    {
+      "title": "Livewire",
+      "type": "library",
+      "url": "https://livewire.laravel.com/"
+    },
+    {
+      "title": "Pinia",
+      "type": "library",
+      "url": "https://pinia.vuejs.org/"
+    },
+    {
+      "title": "Quasar",
+      "type": "library",
+      "url": "https://quasar.dev/"
+    },
+    {
+      "title": "React Query",
+      "type": "library",
+      "url": "https://tanstack.com/query/"
+    },
+    {
+      "title": "Motion",
+      "type": "library",
+      "url": "https://motion.dev/"
+    },
+    {
+      "title": "Zod",
+      "type": "library",
+      "url": "https://zod.dev/"
+    },
+    {
+      "title": "ShadCN",
+      "type": "library",
+      "url": "https://ui.shadcn.com/"
+    },
+    {
+      "title": "Ant Design",
+      "type": "library",
+      "url": "https://ant.design/"
+    },
+    {
+      "title": "PrimeReact",
+      "type": "library",
+      "url": "https://primereact.org/"
+    },
+    {
+      "title": "Bootstrap",
+      "type": "library",
+      "url": "https://getbootstrap.com/"
+    },
+    {
+      "title": "jQuery",
+      "type": "library",
+      "url": "https://jquery.com/"
+    },
+    {
+      "title": "Prisma",
+      "type": "library",
+      "url": "https://www.prisma.io/"
+    },
+    {
+      "title": "MySQL",
+      "type": "database",
+      "url": "https://www.mysql.com/"
+    },
+    {
+      "title": "PostgreSQL",
+      "type": "database",
+      "url": "https://www.postgresql.org/"
+    },
+    {
+      "title": "Redis",
+      "type": "database",
+      "url": "https://redis.io/"
+    },
+    {
+      "title": "MongoDB",
+      "type": "database",
+      "url": "https://www.mongodb.com/"
+    },
+    {
+      "title": "Firebase",
+      "type": "database",
+      "url": "https://firebase.google.com/"
+    },
+    {
+      "title": "Odoo API",
+      "type": "apis-integration",
+      "url": "https://www.odoo.com/"
+    },
+    {
+      "title": "REST API",
+      "type": "apis-integration",
+      "url": "https://restfulapi.net/"
+    },
+    {
+      "title": "OAuth",
+      "type": "apis-integration",
+      "url": "https://oauth.net/"
+    },
+    {
+      "title": "Firebase Messaging",
+      "type": "apis-integration",
+      "url": "https://firebase.google.com/docs/cloud-messaging"
+    },
+    {
+      "title": "Stripe",
+      "type": "apis-integration",
+      "url": "https://stripe.com/"
+    },
+    {
+      "title": "PayPal",
+      "type": "apis-integration",
+      "url": "https://www.paypal.com/"
+    },
+    {
+      "title": "Razorpay",
+      "type": "apis-integration",
+      "url": "https://razorpay.com/"
+    },
+    {
+      "title": "Google Map",
+      "type": "apis-integration",
+      "url": "https://developers.google.com/maps"
+    },
+    {
+      "title": "Docker",
+      "type": "devops",
+      "url": "https://www.docker.com/"
+    },
+    {
+      "title": "Nginx",
+      "type": "devops",
+      "url": "https://nginx.org/"
+    },
+    {
+      "title": "Linux",
+      "type": "devops",
+      "url": "https://www.linux.org/"
+    },
+    {
+      "title": "Vercel",
+      "type": "devops",
+      "url": "https://vercel.com/"
+    },
+    {
+      "title": "Git",
+      "type": "development-tool",
+      "url": "https://git-scm.com/"
+    },
+    {
+      "title": "GitHub",
+      "type": "development-tool",
+      "url": "https://github.com/"
+    },
+    {
+      "title": "GitLab",
+      "type": "development-tool",
+      "url": "https://about.gitlab.com/"
+    },
+    {
+      "title": "Bitbucket",
+      "type": "development-tool",
+      "url": "https://bitbucket.org/"
+    },
+    {
+      "title": "Postman",
+      "type": "development-tool",
+      "url": "https://www.postman.com/"
+    },
+    {
+      "title": "ClickUp",
+      "type": "development-tool",
+      "url": "https://clickup.com/"
+    },
+    {
+      "title": "DDD",
+      "type": "workflow-methodology",
+      "url": "https://martinfowler.com/tags/domain%20driven%20design.html"
+    },
+    {
+      "title": "Modular Architecture",
+      "type": "workflow-methodology",
+      "url": "https://en.wikipedia.org/wiki/Modular_programming"
+    },
+    {
+      "title": "MVC",
+      "type": "workflow-methodology",
+      "url": "https://en.wikipedia.org/wiki/Model–view–controller"
+    },
+    {
+      "title": "MVVM",
+      "type": "workflow-methodology",
+      "url": "https://en.wikipedia.org/wiki/Model–view–viewmodel"
+    },
+    {
+      "title": "Agile / Scrum",
+      "type": "workflow-methodology",
+      "url": "https://www.scrum.org/"
+    },
+    {
+      "title": "Kanban",
+      "type": "workflow-methodology",
+      "url": "https://www.atlassian.com/agile/kanban"
+    }
+  ]
+}

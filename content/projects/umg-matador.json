@@ -1,0 +1,38 @@
+{
+  "name": "UMG Matador",
+  "order": 100,
+  "date": "2025",
+  "type": [
+    "web",
+    "ecommerce",
+    "favorite"
+  ],
+  "description": "An e-commerce platform for Matador to sell heavy machinery across different branches. Includes a React-based frontend, admin panel, and a Node.js backend for managing inventory, orders, and users.",
+  "role": "Full Stack Team Lead",
+  "image": "/projects/umg-matador/image.webp",
+  "link": "https://www.umgmatador.com",
+  "technos": [
+    "Node.js",
+    "React",
+    "React Query",
+    "ShadCN",
+    "PrimeReact"
+  ],
+  "scale": "Enterprise e-commerce for heavy machinery across multiple branches",
+  "businessImpact": "Enabled multi-branch machinery sales with centralized inventory management.",
+  "responsibilities": [
+    "Led development team",
+    "Built React frontend with modern UI libraries",
+    "Developed Node.js backend API",
+    "Implemented inventory management system"
+  ],
+  "achievements": [
+    "Delivered cross-branch e-commerce solution",
+    "Integrated modern React ecosystem tools"
+  ],
+  "architecture": [
+    "Node.js",
+    "React SPA",
+    "REST API"
+  ]
+}

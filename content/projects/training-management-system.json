@@ -1,0 +1,22 @@
+{
+  "name": "Training Management System",
+  "order": 70,
+  "date": "2024",
+  "type": [
+    "web",
+    "business"
+  ],
+  "description": "Corporate training platform for trainer management, schedules, assessments, and compliance tracking. Uses MySQL application logic with read-only PostgreSQL/Odoo master data boundaries.",
+  "image": "/projects/training-management-system/image.webp",
+  "technos": [
+    "Laravel",
+    "Vue.js",
+    "PostgreSQL",
+    "MySQL",
+    "Odoo API",
+    "DDD"
+  ],
+  "responsibilities": [],
+  "achievements": [],
+  "architecture": []
+}

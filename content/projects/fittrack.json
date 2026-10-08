@@ -1,0 +1,19 @@
+{
+  "name": "FitTrack",
+  "order": 150,
+  "date": "2025",
+  "type": [
+    "archive"
+  ],
+  "description": "A mobile application for tracking daily exercise routines, logging workouts, and setting fitness goals. Users can monitor progress over time, track activities like running, cycling, and weightlifting, and get personalized insights. The app includes authentication, workout history, and performance analytics. Built using Kotlin for Android with a PHP-based web service and a MySQL database for secure data storage.",
+  "image": "/projects/fittrack/image.webp",
+  "repoLink": "https://github.com/htun-kyaw791/fittrack",
+  "technos": [
+    "Kotlin",
+    "MySQL",
+    "PHP"
+  ],
+  "responsibilities": [],
+  "achievements": [],
+  "architecture": []
+}

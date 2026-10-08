@@ -1,0 +1,32 @@
+{
+  "name": "Silent Blade Society",
+  "order": 10,
+  "date": "2026",
+  "type": [
+    "web",
+    "frontend"
+  ],
+  "description": "An animation-heavy landing page built for a frontend assessment: a preloader, a horizontally-travelling hero with eight parallax depth planes driven by one scroll value, sprite-sheet frame sequences, and a collection overlay. Motion recreated from a reference site with original artwork.",
+  "role": "Frontend Developer",
+  "link": "https://fluffy-motion.vercel.app",
+  "repoLink": "https://github.com/htun-kyaw791/fluffy-motion",
+  "technos": [
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "Motion",
+    "Lenis"
+  ],
+  "responsibilities": [],
+  "achievements": [
+    "Eight parallax layers animate per frame without React re-renders",
+    "Wheel, touch, keyboard and scrollbar all keep working — the page never scrolls sideways",
+    "No GSAP or UI kit; one animation runtime"
+  ],
+  "architecture": [
+    "Sticky horizontal scroll track",
+    "Shared scroll-progress parallax context",
+    "CSS steps() sprite animation",
+    "Statically prerendered single page"
+  ]
+}

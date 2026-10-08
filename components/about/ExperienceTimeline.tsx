@@ -1,11 +1,13 @@
-import { experiences } from "@/data/experience";
+import type { Experience } from "@/types";
 import { cn } from "@/lib/cn";
 
 /** Career at a glance; clicking a role opens its file in the editor. */
 export default function ExperienceTimeline({
+  experiences,
   activeId,
   onSelect,
 }: {
+  experiences: Experience[];
   activeId?: string;
   onSelect: (id: string) => void;
 }) {

@@ -1,13 +1,14 @@
 import { ImageResponse } from "next/og";
-import { site, stats } from "@/data/site";
+import { getProfile, siteUrl } from "@/lib/content";
 import { OgFrame, ogColors as c, ogFonts, ogPhoto, ogSize } from "@/lib/og";
 
-export const alt = `${site.name} — ${site.role}`;
+export const alt = "Portfolio share image";
 export const size = ogSize;
 export const contentType = "image/png";
 
 export default async function Image() {
-  const [fonts, photo] = await Promise.all([ogFonts(), ogPhoto()]);
+  const site = await getProfile();
+  const [fonts, photo] = await Promise.all([ogFonts(), ogPhoto(site.photo)]);
 
   return new ImageResponse(
     (
@@ -18,7 +19,7 @@ export default async function Image() {
             <div style={{ fontSize: 84, color: c.light, marginTop: 4 }}>{site.name}</div>
             <div style={{ fontSize: 40, color: c.indigo, marginTop: 4 }}>{`> ${site.role}`}</div>
             <div style={{ display: "flex", gap: 32, marginTop: 44 }}>
-              {stats.map((s) => (
+              {site.stats.map((s) => (
                 <div key={s.label} style={{ display: "flex", flexDirection: "column" }}>
                   <div style={{ fontSize: 36, color: c.orange, fontWeight: 600 }}>{s.value}</div>
                   <div style={{ fontSize: 16, color: c.text }}>{s.label}</div>
@@ -29,16 +30,18 @@ export default async function Image() {
               <span style={{ color: c.indigo }}>const</span>
               <span style={{ color: c.green, marginLeft: 14 }}>site</span>
               <span style={{ color: "white", marginLeft: 14 }}>=</span>
-              <span style={{ color: c.coral, marginLeft: 14 }}>{`"${site.url.replace(/^https?:\/\//, "")}"`}</span>
+              <span style={{ color: c.coral, marginLeft: 14 }}>{`"${siteUrl.replace(/^https?:\/\//, "")}"`}</span>
             </div>
           </div>
-          <img
-            src={photo}
-            alt=""
-            width={250}
-            height={250}
-            style={{ flexShrink: 0, borderRadius: 32, border: `2px solid ${c.line}`, objectFit: "cover" }}
-          />
+          {photo && (
+            <img
+              src={photo}
+              alt=""
+              width={250}
+              height={250}
+              style={{ flexShrink: 0, borderRadius: 32, border: `2px solid ${c.line}`, objectFit: "cover" }}
+            />
+          )}
         </div>
       </OgFrame>
     ),

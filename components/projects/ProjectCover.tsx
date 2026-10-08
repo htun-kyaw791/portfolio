@@ -5,7 +5,7 @@ import { cn } from "@/lib/cn";
 /** Screenshot, or a generated code-style cover for projects without one. */
 export default function ProjectCover({ project, className, priority }: { project: Project; className?: string; priority?: boolean }) {
   return (
-    <div className={cn("relative overflow-hidden bg-[linear-gradient(135deg,#1c2b3a,#011627)]", className)}>
+    <div className={cn("relative overflow-hidden bg-[linear-gradient(135deg,var(--color-btn),var(--color-bg))]", className)}>
       {project.image ? (
         <Image
           src={project.image}

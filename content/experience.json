@@ -1,0 +1,65 @@
+{
+  "roles": [
+    {
+      "id": "umg-myanmar",
+      "company": "UMG Myanmar",
+      "role": "Senior Web Developer",
+      "period": "Jul 2024 - Present",
+      "url": "https://www.umgmyanmar.com/",
+      "highlights": [
+        "Led and mentored a team of up to 5 developers and interns, ran technical interviews, and transitioned delivery toward React, Vue, Node, DDD, and modular architecture practices.",
+        "Architected project setup, directory structure, ERDs, and database schemas for incoming corporate software installations.",
+        "Maintained and developed WinFinance, EMS, TIS, and WebPortal for roughly 6,000 total users and 3,000 daily active users.",
+        "Built an enterprise Odoo web portal layer to centralize workflow pipelines and reduce ERP user-licensing costs.",
+        "Engineered Redis server-side caching for Odoo master data, removing redundant external API loading latency.",
+        "Created custom RBAC engines with Spatie and Laravel policies to enforce strict data security.",
+        "Consolidated cloud assets across AWS, Alibaba Cloud, and DigitalOcean with backups and server decommissioning.",
+        "Partnered with business units, branches, and division heads to align software behavior with corporate operations."
+      ],
+      "techs": [
+        "Laravel",
+        "Vue.js",
+        "React",
+        "Node.js",
+        "Odoo API",
+        "Redis",
+        "Docker",
+        "Nginx",
+        "Spatie RBAC",
+        "DDD"
+      ]
+    },
+    {
+      "id": "panacea-soft",
+      "company": "Panacea Soft",
+      "role": "Junior Frontend Developer → Full Stack Developer",
+      "period": "Jul 2021 - Dec 2023",
+      "url": "https://www.panacea-soft.com/",
+      "highlights": [
+        "Progressed from frontend to full stack on large-scale configurable products sold to international customers.",
+        "Accelerated legacy page speeds by up to 6x through database indexing and nested-loop cleanup.",
+        "Engineered a dynamic row-based custom fields system for admin-controlled schema flexibility.",
+        "Built a centralized deployment dashboard for one-click core installations and script updates.",
+        "Implemented frontend Service Workers for fast real-time product filtering and client-side data mapping.",
+        "Integrated secure OAuth workflows for Email, Phone, Google, Apple, and Facebook sign-ins.",
+        "Built live chat, Firebase push notifications, Google Maps, and Stripe/PayPal payment integrations.",
+        "Managed customer support tickets, diagnosed production bugs, and delivered rapid hotfixes.",
+        "Took part in code reviews, sprint planning, and architecture discussions in an Agile team."
+      ],
+      "techs": [
+        "Laravel",
+        "Vue.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "MySQL",
+        "CodeIgniter",
+        "Firebase",
+        "Service Workers",
+        "Stripe",
+        "PayPal",
+        "Google Map",
+        "REST API"
+      ]
+    }
+  ]
+}

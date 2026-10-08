@@ -1,0 +1,44 @@
+{
+  "name": "Odoo Approval Web Portal",
+  "order": 40,
+  "date": "2025",
+  "type": [
+    "favorite",
+    "web",
+    "business"
+  ],
+  "description": "A metadata-driven approval platform integrated with Odoo ERP. Supports configurable workflows, dynamic forms, approval chains, reusable module registration, role-based permissions, and business-rule driven approvals.",
+  "role": "Technical Lead & Full Stack Developer",
+  "image": "/projects/odoo-approval-web-portal/image.webp",
+  "technos": [
+    "Laravel",
+    "Livewire",
+    "MaryUI",
+    "MySQL",
+    "PostgreSQL",
+    "Odoo API"
+  ],
+  "scale": "300+ management users across Finance, Sales, Procurement, Accounting, and Inventory workflows",
+  "businessImpact": "Reduced dependency on Odoo licenses by moving approval processes into a configurable web platform.",
+  "responsibilities": [
+    "Designed overall system architecture",
+    "Built metadata-driven workflow engine",
+    "Designed dynamic form rendering",
+    "Implemented approval chain management",
+    "Integrated Odoo APIs",
+    "Led development team"
+  ],
+  "achievements": [
+    "Delivered initial version within two months",
+    "Supports Budget, Sales, Purchase, Inventory and Accounting approvals",
+    "Reduced approximately 300 Odoo users",
+    "Built reusable architecture for future modules"
+  ],
+  "architecture": [
+    "Metadata Driven Architecture",
+    "Workflow Engine",
+    "RBAC",
+    "Laravel Livewire",
+    "Odoo Integration"
+  ]
+}

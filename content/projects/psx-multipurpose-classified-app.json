@@ -1,0 +1,50 @@
+{
+  "name": "PSX Multipurpose Classified App",
+  "order": 90,
+  "date": "2023",
+  "type": [
+    "web",
+    "ecommerce",
+    "favorite"
+  ],
+  "description": "All-in-one multi-vendor classified marketplace with localized mapping, real-time chat, tokenized payment webhooks, multi-channel OAuth, Firebase messaging, and a powerful admin panel.",
+  "role": "Full Stack Developer",
+  "image": "/projects/psx-multipurpose-classified-app/image.webp",
+  "link": "https://www.products.panacea-soft.co/psx-mpc-demo",
+  "technos": [
+    "Laravel",
+    "Vue.js",
+    "Pinia",
+    "Tailwind CSS",
+    "MySQL",
+    "Firebase Messaging",
+    "Google Map",
+    "OpenStreet Map",
+    "Stripe",
+    "PayPal",
+    "Razorpay",
+    "REST API",
+    "Service Workers"
+  ],
+  "scale": "Multi-vendor marketplace serving thousands of users",
+  "businessImpact": "Unified multiple classified platforms into single marketplace with multi-payment gateway support.",
+  "responsibilities": [
+    "Developed full-stack features as part of the product team",
+    "Built multi-vendor marketplace architecture",
+    "Integrated multiple payment gateways",
+    "Implemented real-time chat functionality",
+    "Designed localization and mapping features"
+  ],
+  "achievements": [
+    "Unified multiple classified platforms",
+    "Supported multi-currency transactions",
+    "Delivered scalable multi-vendor solution"
+  ],
+  "architecture": [
+    "Laravel",
+    "Vue.js",
+    "Pinia",
+    "Multi-Payment Integration",
+    "Real-time Chat"
+  ]
+}

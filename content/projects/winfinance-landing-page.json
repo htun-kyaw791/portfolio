@@ -1,0 +1,21 @@
+{
+  "name": "WinFinance Landing Page",
+  "order": 140,
+  "date": "2025",
+  "type": [
+    "web"
+  ],
+  "description": "A modern and interactive landing page for WinFinance, built to showcase the platform's features and services. Uses smooth animations, server-side rendering, and optimized performance.",
+  "image": "/projects/winfinance-landing-page/image.webp",
+  "link": "https://www.winfinance.com.mm",
+  "technos": [
+    "Next.js",
+    "Framer Motion",
+    "Aceternity UI",
+    "React Query",
+    "Zod"
+  ],
+  "responsibilities": [],
+  "achievements": [],
+  "architecture": []
+}

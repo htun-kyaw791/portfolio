@@ -1,0 +1,25 @@
+{
+  "name": "Multi Restaurant Frontend",
+  "order": 120,
+  "date": "2023",
+  "type": [
+    "web",
+    "ecommerce"
+  ],
+  "description": "A restaurant ordering platform with features such as cart management, branch-based navigation, and location-based restaurant searches.",
+  "image": "/projects/multi-restaurant-frontend/image.webp",
+  "technos": [
+    "Vue.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "Google Map",
+    "OpenStreet Map",
+    "Firebase Messaging",
+    "Stripe",
+    "PayPal",
+    "Razorpay"
+  ],
+  "responsibilities": [],
+  "achievements": [],
+  "architecture": []
+}

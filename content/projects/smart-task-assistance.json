@@ -1,0 +1,41 @@
+{
+  "name": "Smart Task Assistance",
+  "order": 50,
+  "date": "2025",
+  "type": [
+    "web",
+    "business",
+    "favorite"
+  ],
+  "description": "A lightweight AI-assisted task management system that parses natural language into structured tasks. Built with FastAPI, React, Tailwind CSS, Python NLP, and MySQL for fast internal workflow capture.",
+  "role": "Full Stack Developer",
+  "image": "/projects/smart-task-assistance/image.webp",
+  "link": "https://task.htunkyaw.me",
+  "repoLink": "https://gitlab.com/my-projects3800633/smark-task",
+  "technos": [
+    "FastAPI",
+    "React",
+    "Tailwind CSS",
+    "Python",
+    "AI / NLP",
+    "MySQL"
+  ],
+  "scale": "Internal tool for task management automation",
+  "businessImpact": "Accelerated task creation and management through natural language processing.",
+  "responsibilities": [
+    "Built NLP pipeline for task parsing",
+    "Developed FastAPI backend",
+    "Created React frontend",
+    "Integrated MySQL database"
+  ],
+  "achievements": [
+    "Implemented AI-powered task creation",
+    "Designed responsive UI with Tailwind CSS"
+  ],
+  "architecture": [
+    "FastAPI",
+    "React",
+    "AI/NLP Pipeline",
+    "MySQL"
+  ]
+}

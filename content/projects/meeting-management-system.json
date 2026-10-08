@@ -1,0 +1,42 @@
+{
+  "name": "Meeting Management System",
+  "order": 80,
+  "date": "2024",
+  "type": [
+    "favorite",
+    "web",
+    "business"
+  ],
+  "description": "Enterprise meeting management platform supporting meeting planning, minutes of meeting, action plans, KPI meetings, room booking, approvals, and reporting.",
+  "role": "Technical Lead & Senior Full Stack Developer",
+  "image": "/projects/meeting-management-system/image.webp",
+  "technos": [
+    "Laravel",
+    "Vue.js",
+    "Pinia",
+    "Firebase Messaging",
+    "MySQL",
+    "Nginx"
+  ],
+  "scale": "30,000+ meetings across multiple business units",
+  "businessImpact": "Improved performance from over one minute to near-instant response times.",
+  "responsibilities": [
+    "Maintained entire platform",
+    "Optimized database performance",
+    "Refactored legacy structures",
+    "Implemented caching",
+    "Added reporting features"
+  ],
+  "achievements": [
+    "Improved system performance by more than 20x",
+    "Migrated legacy data structures",
+    "Fixed KPI calculation issues",
+    "Reduced technical debt significantly"
+  ],
+  "architecture": [
+    "Laravel",
+    "Vue.js",
+    "Redis",
+    "RBAC"
+  ]
+}

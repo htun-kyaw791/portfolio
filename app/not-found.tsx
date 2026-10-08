@@ -1,13 +1,13 @@
-import Link from "next/link";
+import Frame from "@/components/layout/Frame";
+import NotFoundMessage from "@/components/layout/NotFoundMessage";
+import "./globals.css";
 
+// Unmatched URLs render inside the bare root layout, so this brings its own frame and styles.
+// notFound() from a portfolio page uses app/(site)/not-found.tsx, which is already framed.
 export default function NotFound() {
   return (
-    <section className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
-      <p className="text-6xl text-text-light">404</p>
-      <p>{"// page not found"}</p>
-      <Link href="/" className="text-accent-orange hover:underline">
-        &gt; go back to _hello
-      </Link>
-    </section>
+    <Frame>
+      <NotFoundMessage />
+    </Frame>
   );
 }

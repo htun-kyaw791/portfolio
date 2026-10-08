@@ -1,29 +1,31 @@
 import type { Metadata } from "next";
-import { site } from "@/data/site";
-
-// A page's `openGraph` replaces the root one (including the generated image), so the
-// share image is always declared explicitly. Pass `image` for routes with their own.
-const defaultImage = { url: "/opengraph-image", alt: `${site.name} — ${site.role}` };
+import { getProfile } from "@/lib/content";
 
 /** Per-page title/description/canonical, mirrored into Open Graph and Twitter. */
-export function pageMetadata({
+export async function pageMetadata({
   title,
   description,
   path,
-  image = defaultImage,
+  image,
 }: {
   title: string;
   description: string;
   path: string;
-  image?: { url: string; alt: string };
-}): Metadata {
+  /** `false` for routes with their own opengraph-image file, which Next links itself. */
+  image?: false;
+}): Promise<Metadata> {
+  const site = await getProfile();
   const fullTitle = `${title} | ${site.name}`;
-  const images = [{ ...image, width: 1200, height: 630 }];
+  // A page's `openGraph` replaces the root one (including the generated image), so other
+  // pages point at the root share image explicitly.
+  const shareImage = { url: "/opengraph-image", alt: `${site.name} — ${site.role}` };
+  const ogImages = image === false ? {} : { images: [{ ...shareImage, width: 1200, height: 630 }] };
+  const twImages = image === false ? {} : { images: [shareImage.url] };
   return {
     title,
     description,
     alternates: { canonical: path },
-    openGraph: { type: "website", url: path, siteName: site.name, title: fullTitle, description, images },
-    twitter: { card: "summary_large_image", title: fullTitle, description, images: [image.url] },
+    openGraph: { type: "website", url: path, siteName: site.name, title: fullTitle, description, ...ogImages },
+    twitter: { card: "summary_large_image", title: fullTitle, description, ...twImages },
   };
 }

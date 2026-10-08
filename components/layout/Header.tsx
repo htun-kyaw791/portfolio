@@ -2,10 +2,18 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
-import { contactNav, navItems, site } from "@/data/site";
+import type { NavItem } from "@/types";
 import { cn } from "@/lib/cn";
+
+const navItems: NavItem[] = [
+  { label: "_hello", href: "/" },
+  { label: "_about-me", href: "/about-me" },
+  { label: "_projects", href: "/projects" },
+];
+
+const contactNav: NavItem = { label: "_contact-me", href: "/contact-me" };
 
 function NavLink({ href, label, active }: { href: string; label: string; active: boolean }) {
   return (
@@ -22,16 +30,22 @@ function NavLink({ href, label, active }: { href: string; label: string; active:
   );
 }
 
-export default function Header() {
+export default function Header({ handle }: { handle: string }) {
   const pathname = usePathname();
   // Remember which page the menu was opened on, so navigating (links, back button) closes it.
   const [openedOn, setOpenedOn] = useState<string | null>(null);
   const open = openedOn === pathname;
   const setOpen = (next: boolean) => setOpenedOn(next ? pathname : null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpenedOn(null);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpenedOn(null);
+      // Keep keyboard users where they were instead of dropping focus to <body>.
+      toggleRef.current?.focus();
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
@@ -42,7 +56,7 @@ export default function Header() {
     <header className="relative border-b border-line">
       <div className="flex h-14">
         <Link href="/" className="flex flex-1 items-center px-6 md:w-[311px] md:flex-none md:border-r md:border-line">
-          {site.handle}
+          {handle}
         </Link>
 
         {/* desktop */}
@@ -59,6 +73,7 @@ export default function Header() {
 
         {/* mobile toggle */}
         <button
+          ref={toggleRef}
           type="button"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}

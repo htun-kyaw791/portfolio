@@ -1,3 +1,5 @@
+import { colors } from "./colors";
+
 /** ">_" terminal mark used for the favicon and apple touch icon. */
 export function BrandIcon({ size }: { size: number }) {
   return (
@@ -8,8 +10,8 @@ export function BrandIcon({ size }: { size: number }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#011627",
-        border: `${Math.max(1, size / 32)}px solid #1e2d3d`,
+        background: colors.bg,
+        border: `${Math.max(1, size / 32)}px solid ${colors.line}`,
         borderRadius: size * 0.22,
         fontFamily: "Fira Code",
         fontWeight: 600,
@@ -17,8 +19,8 @@ export function BrandIcon({ size }: { size: number }) {
         letterSpacing: -size * 0.04,
       }}
     >
-      <span style={{ color: "#43d9ad" }}>&gt;</span>
-      <span style={{ color: "#fea55f" }}>_</span>
+      <span style={{ color: colors.green }}>&gt;</span>
+      <span style={{ color: colors.orange }}>_</span>
     </div>
   );
 }

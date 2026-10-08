@@ -1,20 +1,11 @@
 import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { extname, join } from "node:path";
+import { colors } from "./colors";
 
 // Shared bits for the generated Open Graph images (ImageResponse needs TTF, not woff2).
 export const ogSize = { width: 1200, height: 630 };
 
-export const ogColors = {
-  bg: "#011627",
-  deep: "#010c15",
-  line: "#1e2d3d",
-  text: "#607b96",
-  light: "#e5e9f0",
-  orange: "#fea55f",
-  green: "#43d9ad",
-  coral: "#e99287",
-  indigo: "#4d5bce",
-};
+export const ogColors = colors;
 
 const dir = join(process.cwd(), "assets/og");
 
@@ -29,9 +20,12 @@ export async function ogFonts() {
   ];
 }
 
-export async function ogPhoto() {
-  const data = await readFile(join(dir, "me-square.jpg"));
-  return `data:image/jpeg;base64,${data.toString("base64")}`;
+/** The profile photo (a /public path, set in the CMS) as a data URL; ImageResponse reads JPG and PNG only. */
+export async function ogPhoto(publicPath: string) {
+  const type = { ".jpg": "jpeg", ".jpeg": "jpeg", ".png": "png" }[extname(publicPath).toLowerCase()];
+  if (!type) return null;
+  const data = await readFile(join(process.cwd(), "public", publicPath));
+  return `data:image/${type};base64,${data.toString("base64")}`;
 }
 
 /** Editor-window frame used by every OG image. */

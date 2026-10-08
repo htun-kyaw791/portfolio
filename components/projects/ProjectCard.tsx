@@ -4,16 +4,24 @@ import { FiExternalLink } from "react-icons/fi";
 import type { Project } from "@/types";
 import ProjectCover from "./ProjectCover";
 
-export default function ProjectCard({ project, index }: { project: Project; index: number }) {
+export default function ProjectCard({
+  project,
+  number,
+  priority,
+}: {
+  project: Project;
+  number: number;
+  priority?: boolean;
+}) {
   return (
     <article className="flex min-w-0 flex-col">
-      <h3 className="mb-4 truncate text-sm">
-        <span className="font-bold text-accent-indigo">Project {index + 1}</span>
+      <h2 className="mb-4 truncate text-sm">
+        <span className="font-bold text-accent-indigo">Project {number}</span>
         {" // "}_{project.slug}
-      </h3>
+      </h2>
       <div className="flex flex-1 flex-col overflow-hidden rounded-2xl border border-line bg-bg-input">
         <Link href={`/projects/${project.slug}`} className="block border-b border-line">
-          <ProjectCover project={project} className="h-40" priority={index < 3} />
+          <ProjectCover project={project} className="h-40" priority={priority} />
         </Link>
         <div className="flex flex-1 flex-col gap-4 p-6">
           <p className="text-xs text-accent-orange">

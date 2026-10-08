@@ -1,0 +1,25 @@
+{
+  "name": "Buy Sell Frontend",
+  "order": 130,
+  "date": "2023",
+  "type": [
+    "web",
+    "ecommerce"
+  ],
+  "description": "A buy-and-sell marketplace frontend with user authentication, interactive listings, real-time notifications, and multiple payment options.",
+  "image": "/projects/buy-sell-frontend/image.webp",
+  "technos": [
+    "Vue.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "Google Map",
+    "OpenStreet Map",
+    "Firebase Messaging",
+    "Stripe",
+    "PayPal",
+    "Razorpay"
+  ],
+  "responsibilities": [],
+  "achievements": [],
+  "architecture": []
+}

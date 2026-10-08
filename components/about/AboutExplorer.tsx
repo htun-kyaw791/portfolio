@@ -5,8 +5,8 @@ import { useState } from "react";
 import { FaFolder, FaMarkdown } from "react-icons/fa";
 import { IoMdArrowDropright } from "react-icons/io";
 import { IoGameController, IoPerson, IoTerminal } from "react-icons/io5";
-import { aboutSections, type AboutSection } from "@/data/about";
-import { site, stats } from "@/data/site";
+import type { AboutSection } from "@/lib/about";
+import type { Experience, InfoFolder, Profile, Tech } from "@/types";
 import { cn } from "@/lib/cn";
 import Sidebar from "@/components/ui/Sidebar";
 import SidebarSection from "@/components/ui/SidebarSection";
@@ -22,18 +22,28 @@ const activityBar: { id: AboutSection; icon: typeof IoTerminal }[] = [
   { id: "hobbies", icon: IoGameController },
 ];
 
-function firstFile(section: AboutSection) {
-  const folder = aboutSections[section][0];
-  return { folderId: folder.id, fileId: folder.files[0].id };
-}
+export default function AboutExplorer({
+  sections,
+  profile,
+  experiences,
+  technos,
+}: {
+  sections: Record<AboutSection, InfoFolder[]>;
+  profile: Profile;
+  experiences: Experience[];
+  technos: Tech[];
+}) {
+  const firstFile = (section: AboutSection) => {
+    const folder = sections[section][0];
+    return { folderId: folder.id, fileId: folder.files[0].id };
+  };
 
-export default function AboutExplorer() {
   // Open on the current role so experience is visible without any clicks.
   const [section, setSection] = useState<AboutSection>("professional-info");
-  const [openFolders, setOpenFolders] = useState<string[]>(["experience"]);
-  const [active, setActive] = useState(firstFile("professional-info"));
+  const [openFolders, setOpenFolders] = useState<string[]>(() => [sections["professional-info"][0].id]);
+  const [active, setActive] = useState(() => firstFile("professional-info"));
 
-  const folders = aboutSections[section];
+  const folders = sections[section];
   const folder = folders.find((f) => f.id === active.folderId) ?? folders[0];
   const file = folder.files.find((f) => f.id === active.fileId) ?? folder.files[0];
 
@@ -57,7 +67,7 @@ export default function AboutExplorer() {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col overflow-y-auto md:flex-row md:overflow-hidden">
-      <p className="px-6 py-6 text-white md:hidden">_about-me</p>
+      <h1 className="px-6 py-6 text-white md:sr-only">_about-me</h1>
 
       {/* activity bar */}
       <nav className="flex shrink-0 gap-6 border-b border-line px-6 pb-4 text-2xl md:w-[68px] md:flex-col md:items-center md:border-b-0 md:border-r md:px-0 md:pt-4">
@@ -85,6 +95,7 @@ export default function AboutExplorer() {
                 <li key={f.id}>
                   <button
                     type="button"
+                    aria-expanded={open}
                     onClick={() => toggleFolder(f.id)}
                     className={cn("flex w-full items-center gap-2 hover:text-white", f.id === folder.id && "text-white")}
                   >
@@ -116,7 +127,7 @@ export default function AboutExplorer() {
           </ul>
         </SidebarSection>
         <SidebarSection title="contacts">
-          <ContactList />
+          <ContactList profile={profile} />
         </SidebarSection>
       </Sidebar>
 
@@ -137,6 +148,7 @@ export default function AboutExplorer() {
         <div className="flex-1 space-y-10 px-6 py-6 md:overflow-y-auto md:px-10">
           {section === "professional-info" && (
             <ExperienceTimeline
+              experiences={experiences}
               activeId={folder.id === "experience" ? file.id : undefined}
               onSelect={(id) => {
                 setActive({ folderId: "experience", fileId: id });
@@ -146,15 +158,17 @@ export default function AboutExplorer() {
           )}
           {section === "personal-info" && (
             <div className="flex items-center gap-6">
-              <Image
-                src={site.photo}
-                alt={site.name}
-                width={112}
-                height={112}
-                className="size-28 rounded-2xl border border-line object-cover"
-              />
+              {profile.photo && (
+                <Image
+                  src={profile.photo}
+                  alt={profile.name}
+                  width={112}
+                  height={112}
+                  className="size-28 rounded-2xl border border-line object-cover"
+                />
+              )}
               <dl className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm">
-                {stats.map((s) => (
+                {profile.stats.map((s) => (
                   <div key={s.label}>
                     <dt className="text-xl text-accent-orange">{s.value}</dt>
                     <dd className="text-xs">{s.label}</dd>
@@ -163,7 +177,7 @@ export default function AboutExplorer() {
               </dl>
             </div>
           )}
-          <TechStack highlight={file.techs} />
+          <TechStack technos={technos} highlight={file.techs} />
         </div>
       </section>
     </div>

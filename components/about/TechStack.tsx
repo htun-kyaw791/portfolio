@@ -1,10 +1,13 @@
-import { techTypeLabels, technosByType } from "@/data/technos";
+import { techTypes, type TechType } from "@/lib/taxonomy";
 import { cn } from "@/lib/cn";
-
-const groups = [...technosByType()];
+import type { Tech } from "@/types";
 
 /** Tech stack as a JSON-ish object; techs used in the open file are highlighted. */
-export default function TechStack({ highlight = [] }: { highlight?: string[] }) {
+export default function TechStack({ technos, highlight = [] }: { technos: Tech[]; highlight?: readonly string[] }) {
+  const groups = (Object.keys(techTypes) as TechType[])
+    .map((type) => [type, technos.filter((t) => t.type === type)] as const)
+    .filter(([, techs]) => techs.length > 0);
+
   return (
     <div className="space-y-6 text-sm">
       <p className="text-white md:text-text">
@@ -15,14 +18,14 @@ export default function TechStack({ highlight = [] }: { highlight?: string[] }) 
         <div key={type}>
           <p className="mb-2">
             <span className="text-accent-indigo">const</span>{" "}
-            <span className="text-accent-green">{techTypeLabels[type]}</span>{" "}
+            <span className="text-accent-green">{techTypes[type]}</span>{" "}
             <span className="text-white">=</span> [
           </p>
           <div className="flex flex-wrap gap-2 pl-4">
             {techs.map((t) => (
               <a
                 key={t.title}
-                href={t.url}
+                href={t.url || undefined}
                 target="_blank"
                 rel="noreferrer"
                 className={cn(

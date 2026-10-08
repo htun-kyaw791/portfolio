@@ -1,0 +1,39 @@
+{
+  "name": "PS Builder",
+  "order": 110,
+  "date": "2023",
+  "type": [
+    "web",
+    "favorite"
+  ],
+  "description": "Centralized deployment and product management dashboard for PSX ecosystems, handling one-click core installations, synchronized script updates, version control, themes, and permissions.",
+  "role": "Full Stack Developer",
+  "image": "/projects/ps-builder/image.webp",
+  "technos": [
+    "Laravel",
+    "Vue.js",
+    "Pinia",
+    "Tailwind CSS",
+    "MySQL",
+    "REST API"
+  ],
+  "scale": "Centralized deployment dashboard for PSX ecosystem products",
+  "businessImpact": "Automated deployment and version management for multiple products.",
+  "responsibilities": [
+    "Built centralized deployment panel",
+    "Implemented version control integration",
+    "Developed theme management system",
+    "Created permission handling"
+  ],
+  "achievements": [
+    "One-click deployment capability",
+    "Synchronized updates across products",
+    "Streamlined product management workflow"
+  ],
+  "architecture": [
+    "Laravel",
+    "Vue.js",
+    "Pinia",
+    "Modular Architecture"
+  ]
+}

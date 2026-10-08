@@ -1,23 +1,31 @@
-import { experiences, education } from "@/data/experience";
-import { site } from "@/data/site";
+import { getAbout, getExperiences, getProfile, getTechnos, siteUrl } from "@/lib/content";
 
 /** schema.org Person data so search engines can build a knowledge card. */
-export default function JsonLd() {
+export default async function JsonLd() {
+  const [site, { education }, experiences, technos] = await Promise.all([
+    getProfile(),
+    getAbout(),
+    getExperiences(),
+    getTechnos(),
+  ]);
   const current = experiences[0];
   const data = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: site.name,
-    url: site.url,
-    image: `${site.url}${site.photo}`,
+    url: siteUrl,
+    image: site.photo ? `${siteUrl}${site.photo}` : undefined,
     jobTitle: site.role,
     description: site.summary,
     email: `mailto:${site.email}`,
-    address: { "@type": "PostalAddress", addressLocality: "Yangon", addressCountry: "MM" },
-    worksFor: { "@type": "Organization", name: current.company, url: current.url },
-    alumniOf: education.map((e) => ({ "@type": "EducationalOrganization", name: e.institution, url: e.url })),
-    sameAs: [site.github, site.linkedin],
-    knowsAbout: ["Laravel", "Vue.js", "React", "Next.js", "Node.js", "Odoo", "Domain-Driven Design", "Redis", "MySQL", "PostgreSQL"],
+    address: site.location ? { "@type": "PostalAddress", addressLocality: site.location } : undefined,
+    worksFor: current ? { "@type": "Organization", name: current.company, url: current.url || undefined } : undefined,
+    alumniOf: education.map((e) => ({ "@type": "EducationalOrganization", name: e.institution, url: e.url || undefined })),
+    sameAs: [site.github, site.linkedin, site.gitlab].filter(Boolean),
+    // Everything on the about-me tech stack except everyday tools (Git, Postman, ...).
+    knowsAbout: technos
+      .filter((t) => t.type !== "development-tool")
+      .map((t) => ({ "@type": "Thing", name: t.title, url: t.url })),
   };
 
   return (

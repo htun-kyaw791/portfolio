@@ -1,0 +1,20 @@
+{
+  "name": "RentalManager",
+  "order": 160,
+  "date": "2022",
+  "type": [
+    "archive"
+  ],
+  "description": "A Windows application for managing rentals. Users can sign up, sign in, browse items, and rent them. Admins can manage users and rental items with full CRUD functionality and view rental history. Built using C# and .NET with a Microsoft Access (.mdb) database, this project taught me desktop application development, user authentication, and database management.",
+  "image": "/projects/rentalmanager/image.webp",
+  "repoLink": "https://github.com/htun-kyaw791/rentalmanager",
+  "technos": [
+    "C#",
+    ".NET",
+    "WinForms",
+    "Microsoft Access"
+  ],
+  "responsibilities": [],
+  "achievements": [],
+  "architecture": []
+}

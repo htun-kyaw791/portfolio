@@ -1,0 +1,43 @@
+{
+  "name": "WinFinance Loan Management System",
+  "order": 60,
+  "date": "2024",
+  "type": [
+    "web",
+    "finance",
+    "favorite"
+  ],
+  "description": "Enterprise financial engine for mobile loan applications, automated interest logic, guarantor tracking, multi-step approvals, Odoo API synchronization, queue handlers, SMS alerts, and Firebase status notifications.",
+  "role": "Technical Lead & Full Stack Developer",
+  "image": "/projects/winfinance-loan-management-system/image.webp",
+  "technos": [
+    "Laravel",
+    "Vue.js",
+    "Quasar",
+    "MySQL",
+    "Firebase Messaging",
+    "Odoo API",
+    "BoomSMS"
+  ],
+  "scale": "Enterprise financial application serving multiple business units",
+  "businessImpact": "Streamlined mobile loan application workflows with automated approvals and multi-channel notifications.",
+  "responsibilities": [
+    "Led full-stack development",
+    "Built mobile-first loan application workflows",
+    "Implemented automated interest calculations",
+    "Integrated Odoo API synchronization",
+    "Set up SMS and Firebase notification systems"
+  ],
+  "achievements": [
+    "Delivered scalable enterprise solution",
+    "Integrated multiple communication channels",
+    "Reduced processing time with queue handlers"
+  ],
+  "architecture": [
+    "Laravel",
+    "Vue.js",
+    "Quasar",
+    "Odoo Integration",
+    "Queue Workers"
+  ]
+}

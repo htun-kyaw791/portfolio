@@ -1,0 +1,40 @@
+{
+  "name": "FlowDesk",
+  "order": 30,
+  "date": "2025",
+  "type": [
+    "favorite",
+    "web",
+    "business"
+  ],
+  "description": "An internal productivity platform combining project management, release management, documentation, knowledge sharing, reporting dashboards, and support workflows.",
+  "role": "Technical Lead & Full Stack Developer",
+  "image": "/projects/flowdesk/image.webp",
+  "technos": [
+    "Node.js",
+    "React",
+    "MySQL",
+    "REST API",
+    "Ant Design",
+    "Tailwind CSS"
+  ],
+  "scale": "Internal platform used by development, QA, support and business teams",
+  "businessImpact": "Reduced manual documentation, release tracking and reporting effort across departments.",
+  "responsibilities": [
+    "Designed architecture",
+    "Mentored junior React developers",
+    "Built release management module",
+    "Built reporting dashboards",
+    "Implemented document management"
+  ],
+  "achievements": [
+    "Centralized project documentation",
+    "Replaced manual release-note tracking",
+    "Adopted by support and QA teams"
+  ],
+  "architecture": [
+    "React SPA",
+    "REST APIs",
+    "Modular Design"
+  ]
+}

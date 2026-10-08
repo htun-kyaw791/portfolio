@@ -1,22 +1,63 @@
 "use client";
 
-import { useState } from "react";
-import { isArchived, projects, projectTypes } from "@/data/projects";
-import type { ProjectType } from "@/types";
+import { Suspense } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { projectTypes, type ProjectType } from "@/lib/taxonomy";
+import type { Project } from "@/types";
 import Sidebar from "@/components/ui/Sidebar";
 import SidebarSection from "@/components/ui/SidebarSection";
 import TabBar from "@/components/ui/TabBar";
 import ProjectCard from "./ProjectCard";
 
-const counts = Object.fromEntries(
-  projectTypes.map((t) => [t, projects.filter((p) => p.type.includes(t)).length]),
-) as Record<ProjectType, number>;
+/** Early learning projects: hidden from the default list, shown via the "archive" filter. */
+const isArchived = (p: Project) => p.type.includes("archive");
 
-export default function ProjectsExplorer() {
-  const [selected, setSelected] = useState<ProjectType[]>([]);
+/** Reads `?type=web,frontend`, ignoring unknown or repeated values. */
+function parseTypes(param: string | null): ProjectType[] {
+  const valid = (param ?? "").split(",").filter((t): t is ProjectType => projectTypes.includes(t as ProjectType));
+  return [...new Set(valid)];
+}
+
+/**
+ * Filters live in the URL so a filtered view can be shared and the back button
+ * undoes a filter. Reading search params opts this part out of prerendering, so
+ * the Suspense fallback — the unfiltered list — is what ships in the static HTML.
+ */
+export default function ProjectsExplorer({ projects }: { projects: Project[] }) {
+  return (
+    <Suspense fallback={<ProjectsView projects={projects} selected={[]} onChange={() => {}} />}>
+      <UrlProjectsView projects={projects} />
+    </Suspense>
+  );
+}
+
+function UrlProjectsView({ projects }: { projects: Project[] }) {
+  const pathname = usePathname();
+  const selected = parseTypes(useSearchParams().get("type"));
+
+  // Native pushState integrates with the Next router, so useSearchParams re-renders.
+  const onChange = (next: ProjectType[]) =>
+    window.history.pushState(null, "", next.length ? `${pathname}?type=${next.join(",")}` : pathname);
+
+  return <ProjectsView projects={projects} selected={selected} onChange={onChange} />;
+}
+
+function ProjectsView({
+  projects,
+  selected,
+  onChange,
+}: {
+  projects: Project[];
+  selected: ProjectType[];
+  onChange: (next: ProjectType[]) => void;
+}) {
+  const counts = Object.fromEntries(
+    projectTypes.map((t) => [t, projects.filter((p) => p.type.includes(t)).length]),
+  ) as Record<ProjectType, number>;
 
   const toggle = (type: ProjectType) =>
-    setSelected((s) => (s.includes(type) ? s.filter((t) => t !== type) : [...s, type]));
+    onChange(selected.includes(type) ? selected.filter((t) => t !== type) : [...selected, type]);
+  const clear = () => onChange([]);
 
   // Archived (early learning) projects only show when the "archive" filter is on.
   const visible = selected.length
@@ -28,7 +69,7 @@ export default function ProjectsExplorer() {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col overflow-y-auto md:flex-row md:overflow-hidden">
-      <p className="px-6 py-6 text-white md:hidden">_projects</p>
+      <h1 className="px-6 py-6 text-white md:sr-only">_projects</h1>
 
       <Sidebar className="md:w-[311px]">
         <SidebarSection title="projects">
@@ -52,7 +93,7 @@ export default function ProjectsExplorer() {
             })}
           </ul>
           {selected.length > 0 && (
-            <button type="button" onClick={() => setSelected([])} className="mt-4 text-sm text-accent-orange hover:underline">
+            <button type="button" onClick={clear} className="mt-4 text-sm text-accent-orange hover:underline">
               clear-filters
             </button>
           )}
@@ -60,14 +101,15 @@ export default function ProjectsExplorer() {
       </Sidebar>
 
       <section className="flex min-w-0 flex-1 flex-col">
-        <TabBar label={label} onClose={selected.length ? () => setSelected([]) : undefined} closeLabel="Clear filters" />
+        <TabBar label={label} onClose={selected.length ? clear : undefined} closeLabel="Clear filters" />
         <div className="flex-1 px-6 py-6 md:overflow-y-auto md:p-12">
           <p className="mb-6 md:hidden">
             <span className="text-white">{"// projects"}</span> / {label}
           </p>
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 xl:grid-cols-3">
+            {/* Number from the full list so a project keeps its number across filters. */}
             {visible.map((p, i) => (
-              <ProjectCard key={p.slug} project={p} index={i} />
+              <ProjectCard key={p.slug} project={p} number={projects.indexOf(p) + 1} priority={i < 3} />
             ))}
           </div>
           {!selected.includes("archive") && (

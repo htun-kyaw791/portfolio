@@ -20,6 +20,7 @@ export default function SidebarSection({
     <section className="border-b border-line">
       <button
         type="button"
+        aria-expanded={open}
         onClick={() => setOpen((o) => !o)}
         className="flex w-full items-center gap-3 border-b border-line bg-line/40 px-4 py-2 text-white md:bg-transparent"
       >

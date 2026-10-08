@@ -1,0 +1,31 @@
+{
+  "name": "Rezerv Data Table",
+  "order": 20,
+  "date": "2026",
+  "type": [
+    "web",
+    "frontend"
+  ],
+  "description": "A generic, fully typed data table built from scratch — no TanStack Table or AG Grid. Sorting, filtering, pagination, expandable child rows, pinned columns, column visibility, skeleton states and server-driven mode, with a live documentation page for every variant.",
+  "role": "Frontend Developer",
+  "link": "https://rezerv-datatable.vercel.app",
+  "repoLink": "https://github.com/htun-kyaw791/rezerv-datatable",
+  "technos": [
+    "Next.js",
+    "TypeScript",
+    "React",
+    "Tailwind CSS"
+  ],
+  "responsibilities": [],
+  "achievements": [
+    "Client-side and server-driven modes (2,000-row invoices demo)",
+    "Inline and on-demand child rows",
+    "Edge-case toolbar for latency, failed fetches and empty data"
+  ],
+  "architecture": [
+    "lib/ — pure pipeline logic, no React",
+    "hooks/ — state, no JSX",
+    "components/ — rendering, no logic",
+    "Typed column helper (columns as data)"
+  ]
+}

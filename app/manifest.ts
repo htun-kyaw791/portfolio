@@ -1,15 +1,17 @@
 import type { MetadataRoute } from "next";
-import { site } from "@/data/site";
+import { getProfile } from "@/lib/content";
+import { colors } from "@/lib/colors";
 
-export default function manifest(): MetadataRoute.Manifest {
+export default async function manifest(): Promise<MetadataRoute.Manifest> {
+  const site = await getProfile();
   return {
     name: `${site.name} — ${site.role}`,
     short_name: site.name,
     description: site.summary,
     start_url: "/",
     display: "standalone",
-    background_color: "#010c15",
-    theme_color: "#011627",
+    background_color: colors.deep,
+    theme_color: colors.bg,
     icons: [
       { src: "/icon", sizes: "64x64", type: "image/png" },
       { src: "/apple-icon", sizes: "180x180", type: "image/png" },

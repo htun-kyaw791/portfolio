@@ -1,0 +1,23 @@
+{
+  "name": "BookWorld",
+  "order": 170,
+  "date": "2019",
+  "type": [
+    "archive"
+  ],
+  "description": "A web app for book lovers to explore, purchase, and download PDF books. Users can favorite, comment, and rate books, while premium users access exclusive content. Built with Laravel, JavaScript, Bootstrap, and MySQL, this project taught me payment processing, database management, and AI integration.",
+  "image": "/projects/bookworld/image.webp",
+  "repoLink": "https://github.com/htun-kyaw791/bookworld",
+  "technos": [
+    "Laravel",
+    "JavaScript",
+    "Bootstrap",
+    "MySQL",
+    "PHP",
+    "HTML",
+    "CSS"
+  ],
+  "responsibilities": [],
+  "achievements": [],
+  "architecture": []
+}
