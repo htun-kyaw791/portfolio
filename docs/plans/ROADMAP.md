@@ -113,7 +113,7 @@ mid laptop, playable by keyboard and touch, high scores persist.
 
 ---
 
-## Phase 3 — Terminal (`/terminal`, also a palette command and `` Ctrl+` ``)
+## Phase 3 — Terminal (`/terminal`, also a palette command and `` Ctrl+` ``) ✅ done 2026-10-09 (Konami code moves to Phase 4)
 
 - `components/terminal/Terminal.tsx`: prompt `htun@portfolio:~$`, history (↑/↓),
   Tab completion, `Ctrl+L` clear, clickable output links.

@@ -15,3 +15,16 @@ export function openPalette(query = "") {
 export function toast(message: string) {
   window.dispatchEvent(new CustomEvent<ToastDetail>(TOAST, { detail: { message } }));
 }
+
+export const BLACKHOLE = "hk:blackhole";
+export const TERMINAL_TOGGLE = "hk:terminal-toggle";
+
+/** Ask the page to collapse into a black hole (easter egg; see components/blackhole). */
+export function summonBlackHole() {
+  window.dispatchEvent(new Event(BLACKHOLE));
+}
+
+/** Open/close the integrated terminal drawer. */
+export function toggleTerminal() {
+  window.dispatchEvent(new Event(TERMINAL_TOGGLE));
+}
