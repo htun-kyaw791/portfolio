@@ -23,6 +23,8 @@ const components: Record<GameId, React.ComponentType<GameProps>> = {
   snake: dynamic(() => import("./games/Snake"), { ssr: false, loading: Loading }),
   breakout: dynamic(() => import("./games/Breakout"), { ssr: false, loading: Loading }),
   typing: dynamic(() => import("./games/Typing"), { ssr: false, loading: Loading }),
+  invaders: dynamic(() => import("./games/Invaders"), { ssr: false, loading: Loading }),
+  horizon: dynamic(() => import("./games/Horizon"), { ssr: false, loading: Loading }),
 };
 
 function subscribeHash(cb: () => void) {
@@ -85,7 +87,7 @@ export default function Arcade({ technos, variant = "home" }: { technos: readonl
       <Bolt className="bottom-3 left-3" />
       <Bolt className="bottom-3 right-3" />
 
-      <div role="tablist" aria-label="Games" onKeyDown={onTabKey} className="mx-4 mb-4 flex gap-1 overflow-x-auto text-xs">
+      <div role="tablist" aria-label="Games" onKeyDown={onTabKey} className="mb-4 flex justify-center gap-0.5 overflow-x-auto text-[11px]">
         {games.map((g) => (
           <button
             key={g.id}
@@ -100,7 +102,7 @@ export default function Arcade({ technos, variant = "home" }: { technos: readonl
             tabIndex={g.id === current ? 0 : -1}
             onClick={() => select(g.id)}
             className={cn(
-              "rounded-t-md border-b-2 px-3 py-1.5 transition-colors",
+              "shrink-0 rounded-t-md border-b-2 px-1.5 py-1.5 transition-colors",
               g.id === current ? "border-accent-orange bg-bg-deep/40 text-white" : "border-transparent text-text-light/70 hover:text-white",
             )}
           >

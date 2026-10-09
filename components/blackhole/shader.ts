@@ -21,6 +21,7 @@ uniform float uTime;
 uniform float uZoom;     // apparent size of the hole (1 = default framing)
 uniform vec2 uCenter;    // screen offset of the hole, in units of screen height
 uniform vec2 uLook;      // camera nudge from the pointer, -1..1
+uniform float uElev;     // camera height above the disk plane, radians
 uniform vec3 uHot;
 uniform vec3 uMid;
 uniform vec3 uCool;
@@ -105,7 +106,7 @@ void main() {
   vec2 p = (gl_FragCoord.xy - 0.5 * uRes) / uRes.y - uCenter;
 
   // camera slightly above the disk plane, orbiting a little with the pointer
-  float elev = 0.16 + uLook.y * 0.12;
+  float elev = uElev + uLook.y * 0.12;
   float yaw = uLook.x * 0.35 + uTime * 0.01;
   float dist = 26.0;
   vec3 ro = dist * vec3(sin(yaw) * cos(elev), sin(elev), -cos(yaw) * cos(elev));
