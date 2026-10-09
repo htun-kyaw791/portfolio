@@ -584,6 +584,16 @@ const commandList: Command[] = [
       ),
   },
   {
+    name: "crt",
+    summary: "",
+    hidden: true,
+    run: (ctx) => {
+      const crt = !getPrefs().crt;
+      setPrefs({ crt });
+      ctx.print(crt ? "degaussing… welcome to 1987." : "crt off. back to the future.", "muted");
+    },
+  },
+  {
     name: "ping",
     summary: "",
     hidden: true,

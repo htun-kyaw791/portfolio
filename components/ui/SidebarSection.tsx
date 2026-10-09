@@ -27,7 +27,15 @@ export default function SidebarSection({
         <IoMdArrowDropdown className={cn("text-xl transition-transform", !open && "-rotate-90")} />
         {title}
       </button>
-      {open && <div className="px-4 py-3">{children}</div>}
+      {/* grid-rows 0fr → 1fr animates to the content's real height */}
+      <div
+        inert={!open}
+        className={cn("grid transition-[grid-template-rows] duration-300 ease-out", open ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}
+      >
+        <div className="overflow-hidden">
+          <div className="px-4 py-3">{children}</div>
+        </div>
+      </div>
     </section>
   );
 }

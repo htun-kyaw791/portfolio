@@ -16,7 +16,7 @@ export default function ExperienceTimeline({
       <p className="mb-6 text-white md:text-text">{"// experience-timeline"}</p>
       <ol className="relative space-y-6 border-l border-line pl-6">
         {experiences.map((e) => (
-          <li key={e.id} className="relative">
+          <li key={e.id} className="reveal relative">
             <span
               aria-hidden
               className={cn(

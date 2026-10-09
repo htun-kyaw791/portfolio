@@ -237,3 +237,191 @@ body {
     opacity: 1;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Page transitions (React <ViewTransition>, see components/layout/PageTransition)
+   Tabs slide like switching editor tabs; the window chrome stays put.
+   --------------------------------------------------------------------------- */
+
+/* only the page content moves: the rest of the window swaps instantly */
+::view-transition-old(root) {
+  display: none;
+}
+::view-transition-new(root) {
+  animation: none;
+}
+
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+::view-transition-old(.nav-forward) {
+  --slide-offset: -48px;
+  animation:
+    140ms ease-in both vt-fade reverse,
+    320ms ease-in-out both vt-slide reverse;
+}
+::view-transition-new(.nav-forward) {
+  --slide-offset: 48px;
+  animation:
+    200ms ease-out 120ms both vt-fade,
+    320ms ease-in-out both vt-slide;
+}
+::view-transition-old(.nav-back) {
+  --slide-offset: 48px;
+  animation:
+    140ms ease-in both vt-fade reverse,
+    320ms ease-in-out both vt-slide reverse;
+}
+::view-transition-new(.nav-back) {
+  --slide-offset: -48px;
+  animation:
+    200ms ease-out 120ms both vt-fade,
+    320ms ease-in-out both vt-slide;
+}
+
+/* project card cover grows into the project page cover */
+::view-transition-group(.morph) {
+  animation-duration: 380ms;
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: vt-via-blur;
+}
+
+@keyframes vt-fade {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+@keyframes vt-slide {
+  from {
+    translate: var(--slide-offset);
+  }
+  to {
+    translate: 0;
+  }
+}
+@keyframes vt-via-blur {
+  30% {
+    filter: blur(3px);
+  }
+}
+
+/* reduced motion: swap instantly (the OS setting unless forced, or the site's own) */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="full"])::view-transition-old(*),
+  :root:not([data-motion="full"])::view-transition-new(*),
+  :root:not([data-motion="full"])::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+:root[data-motion="reduced"]::view-transition-old(*),
+:root[data-motion="reduced"]::view-transition-new(*),
+:root[data-motion="reduced"]::view-transition-group(*) {
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+}
+
+/* hello: the role types itself out, then the caret keeps blinking */
+@media (min-width: 768px) {
+  .typewriter {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: bottom;
+    border-right: 0.08em solid currentColor;
+    width: calc(var(--chars) * 1ch + 0.1em);
+    animation:
+      typewriter 1.4s steps(var(--chars)) 0.3s both,
+      caret 0.9s step-end infinite;
+  }
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes caret {
+  50% {
+    border-color: transparent;
+  }
+}
+
+/* content that fades up as it scrolls into view (where supported) */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    translate: 0 18px;
+  }
+}
+
+/* reduced motion: no typing, no strobing caret, no reveal */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="full"]) :is(.typewriter, .reveal) {
+    animation: none !important;
+    border-right-color: transparent;
+  }
+}
+:root[data-motion="reduced"] :is(.typewriter, .reveal) {
+  animation: none !important;
+  border-right-color: transparent;
+}
+
+/* CRT mode (palette → Preferences: CRT mode): scanlines, vignette, glow */
+:root[data-crt] [data-frame] {
+  position: relative;
+  text-shadow: 0 0 2px color-mix(in oklab, currentColor 55%, transparent);
+}
+:root[data-crt] [data-frame]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    repeating-linear-gradient(to bottom, rgb(0 0 0 / 0.16) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse at center, transparent 58%, rgb(0 0 0 / 0.38));
+  animation: crt-flicker 7s infinite;
+}
+@keyframes crt-flicker {
+  0%,
+  96%,
+  100% {
+    opacity: 1;
+  }
+  97% {
+    opacity: 0.82;
+  }
+  98% {
+    opacity: 0.95;
+  }
+}

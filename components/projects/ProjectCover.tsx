@@ -1,10 +1,25 @@
 import Image from "next/image";
+import { ViewTransition } from "react";
 import type { Project } from "@/types";
 import { cn } from "@/lib/cn";
 
-/** Screenshot, or a generated code-style cover for projects without one. */
-export default function ProjectCover({ project, className, priority }: { project: Project; className?: string; priority?: boolean }) {
-  return (
+/**
+ * Screenshot, or a generated code-style cover for projects without one.
+ * `morph`: the card's cover and the project page's cover share a view
+ * transition name, so opening a project grows the image into place.
+ */
+export default function ProjectCover({
+  project,
+  className,
+  priority,
+  morph = true,
+}: {
+  project: Project;
+  className?: string;
+  priority?: boolean;
+  morph?: boolean;
+}) {
+  const cover = (
     <div className={cn("relative overflow-hidden bg-[linear-gradient(135deg,var(--color-btn),var(--color-bg))]", className)}>
       {project.image ? (
         <Image
@@ -25,5 +40,11 @@ export default function ProjectCover({ project, className, priority }: { project
         </div>
       )}
     </div>
+  );
+  if (!morph) return cover;
+  return (
+    <ViewTransition name={`cover-${project.slug}`} share="morph" default="none">
+      {cover}
+    </ViewTransition>
   );
 }

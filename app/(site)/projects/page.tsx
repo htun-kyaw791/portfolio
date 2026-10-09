@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 import { getProfile, getProjects } from "@/lib/content";
 import ProjectsExplorer from "@/components/projects/ProjectsExplorer";
+import PageTransition from "@/components/layout/PageTransition";
 
 export async function generateMetadata(): Promise<Metadata> {
   const [site, projects] = await Promise.all([getProfile(), getProjects()]);
@@ -13,5 +14,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ProjectsPage() {
-  return <ProjectsExplorer projects={await getProjects()} />;
+  return (
+    <PageTransition>
+      <ProjectsExplorer projects={await getProjects()} />
+    </PageTransition>
+  );
 }

@@ -23,7 +23,8 @@ export default function TabBar({
       <div className="flex items-center gap-12 border-r border-line px-4 text-sm">
         {label}
         {closeHref ? (
-          <Link href={closeHref} aria-label={closeLabel} title={closeLabel} className={closeClass}>
+          // closing a tab goes back up a level
+          <Link href={closeHref} transitionTypes={["nav-back"]} aria-label={closeLabel} title={closeLabel} className={closeClass}>
             <IoClose />
           </Link>
         ) : onClose ? (

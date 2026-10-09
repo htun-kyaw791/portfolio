@@ -109,24 +109,29 @@ export default function AboutExplorer({
                     <FaFolder className="shrink-0" style={{ color: f.color }} />
                     {f.label}
                   </button>
-                  {open && (
-                    <ul className="mt-2 space-y-1 pl-6">
-                      {f.files.map((fl) => (
-                        <li key={fl.id}>
-                          <button
-                            type="button"
-                            onClick={() => setActive({ folderId: f.id, fileId: fl.id })}
-                            className={cn(
-                              "flex items-center gap-2 text-sm hover:text-white",
-                              fl.id === file.id && f.id === folder.id && "text-white",
-                            )}
-                          >
-                            <FaMarkdown className="shrink-0" /> {fl.label}.md
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                  <div
+                    inert={!open}
+                    className={cn("grid transition-[grid-template-rows] duration-300 ease-out", open ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}
+                  >
+                    <div className="overflow-hidden">
+                      <ul className="mt-2 space-y-1 pl-6">
+                        {f.files.map((fl) => (
+                          <li key={fl.id}>
+                            <button
+                              type="button"
+                              onClick={() => setActive({ folderId: f.id, fileId: fl.id })}
+                              className={cn(
+                                "flex items-center gap-2 text-sm hover:text-white",
+                                fl.id === file.id && f.id === folder.id && "text-white",
+                              )}
+                            >
+                              <FaMarkdown className="shrink-0" /> {fl.label}.md
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </li>
               );
             })}

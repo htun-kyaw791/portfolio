@@ -183,7 +183,7 @@ Only loaded on routes that use them.
 
 ---
 
-## Phase 6 — Motion polish
+## Phase 6 — Motion polish ✅ done 2026-10-09 (no animation library needed)
 
 - **Route transitions** with React `<ViewTransition>` (built into the App Router,
   no library): tab-slide between top-level pages, directional for prev/next
