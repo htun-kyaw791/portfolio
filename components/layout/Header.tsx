@@ -59,8 +59,10 @@ export default function Header({ handle }: { handle: string }) {
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   return (
-    // named so it stays put while page content slides (see globals.css)
-    <header className="relative border-b border-line [view-transition-name:site-header]">
+    // named so it stays put while page content slides (see globals.css). A
+    // view-transition-name makes the header its own stacking context, so it
+    // needs a z-index or the mobile menu ends up under the page.
+    <header className="relative z-30 border-b border-line [view-transition-name:site-header]">
       <div className="flex h-14">
         <Link href="/" className="flex flex-1 items-center px-6 md:w-[311px] md:flex-none md:border-r md:border-line">
           {handle}

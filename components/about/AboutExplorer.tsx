@@ -156,7 +156,8 @@ export default function AboutExplorer({
       {/* right panel */}
       <section className="flex min-w-0 flex-1 flex-col">
         <div className="hidden h-10 shrink-0 border-b border-line md:block" />
-        <div className="flex-1 space-y-10 px-6 py-6 md:overflow-y-auto md:px-10">
+        {/* focusable so keyboard users can scroll it (axe: scrollable-region-focusable) */}
+        <div tabIndex={0} role="region" aria-label="Details" className="flex-1 space-y-10 px-6 py-6 md:overflow-y-auto md:px-10">
           {section === "professional-info" && (
             <ExperienceTimeline
               experiences={experiences}

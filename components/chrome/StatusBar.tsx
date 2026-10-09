@@ -88,7 +88,7 @@ export default function StatusBar({ repoHref, availability }: { repoHref: string
         <VscError aria-hidden /> 0 <VscWarning aria-hidden /> 0
       </span>
 
-      <span className="flex items-center px-2.5 text-text/90">{hydrated ? routeToFile(pathname) : ""}</span>
+      <span className="flex items-center px-2.5">{hydrated ? routeToFile(pathname) : ""}</span>
 
       <button type="button" onClick={toggleTerminal} className={item} title="Toggle terminal (Ctrl+`)">
         <VscTerminal aria-hidden /> terminal

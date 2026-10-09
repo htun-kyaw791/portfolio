@@ -11,7 +11,7 @@
   --color-line: #1e2d3d;
 
   /* secondary (text) */
-  --color-text: #607b96;
+  --color-text: #68829b; /* #607b96 in the original design; nudged to pass WCAG AA (4.5:1) */
   --color-text-light: #e5e9f0;
   --color-white: #ffffff;
 
@@ -20,7 +20,7 @@
   --color-accent-green: #43d9ad;
   --color-accent-coral: #e99287;
   --color-accent-purple: #c98bdf;
-  --color-accent-indigo: #4d5bce;
+  --color-accent-indigo: #6b77d6; /* was #4d5bce; nudged for AA contrast */
   --color-accent-blue: #3a49a4;
 
   /* buttons */
@@ -77,7 +77,7 @@
   --color-white: #ffffff;
   --color-accent-orange: #fd971f;
   --color-accent-green: #a6e22e;
-  --color-accent-coral: #f92672;
+  --color-accent-coral: #fa4989;
   --color-accent-purple: #ae81ff;
   --color-accent-indigo: #66d9ef;
   --color-accent-blue: #529aaa;
@@ -117,9 +117,9 @@
   --color-white: #fdf6e3;
   --color-accent-orange: #e0823d;
   --color-accent-green: #859900;
-  --color-accent-coral: #dc322f;
-  --color-accent-purple: #d33682;
-  --color-accent-indigo: #268bd2;
+  --color-accent-coral: #e56563;
+  --color-accent-purple: #dd629e;
+  --color-accent-indigo: #3794d6;
   --color-accent-blue: #2aa198;
   --color-btn: #073642;
   --color-btn-hover: #0d4a59;
