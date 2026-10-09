@@ -14,11 +14,12 @@ import {
   VscProject,
   VscSettingsGear,
   VscSymbolColor,
+  VscTerminal,
   VscUnmute,
 } from "react-icons/vsc";
 import { games } from "@/components/arcade/games";
 import { cn } from "@/lib/cn";
-import { PALETTE_OPEN, toast, type PaletteOpenDetail } from "@/lib/events";
+import { PALETTE_OPEN, toast, toggleTerminal, type PaletteOpenDetail } from "@/lib/events";
 import { fuzzyMatch } from "@/lib/fuzzy";
 import { useHotkey } from "@/lib/hotkeys";
 import { applyPrefs, getPrefs, setPrefs, usePrefs, type MotionPref } from "@/lib/prefs";
@@ -58,6 +59,7 @@ const pages = [
   { label: "_about-me", href: "/about-me", hint: "src/about-me.tsx" },
   { label: "_projects", href: "/projects", hint: "src/projects/index.tsx" },
   { label: "_arcade", href: "/arcade", hint: "src/arcade.tsx" },
+  { label: "_terminal", href: "/terminal", hint: "full-screen shell" },
   { label: "_contact-me", href: "/contact-me", hint: "src/contact-me.tsx" },
 ];
 
@@ -187,6 +189,15 @@ export default function CommandPalette({ projects, links }: { projects: readonly
           setPrefs({ motion });
           toast(`motion: ${motion}`);
         },
+      },
+      {
+        id: "view:terminal",
+        group: "preference",
+        label: "View: Toggle terminal",
+        hint: "Ctrl+`",
+        keywords: "shell bash console command line",
+        icon: <VscTerminal />,
+        run: () => toggleTerminal(),
       },
       {
         id: "pref:sound",

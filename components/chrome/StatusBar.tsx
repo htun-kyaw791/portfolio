@@ -2,8 +2,8 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { VscCheck, VscError, VscRemote, VscSourceControl, VscWarning } from "react-icons/vsc";
-import { openPalette } from "@/lib/events";
+import { VscCheck, VscError, VscRemote, VscSourceControl, VscTerminal, VscWarning } from "react-icons/vsc";
+import { openPalette, toggleTerminal } from "@/lib/events";
 import { usePrefs } from "@/lib/prefs";
 import { getTheme } from "@/lib/themes";
 
@@ -85,6 +85,10 @@ export default function StatusBar({ repoHref, availability }: { repoHref: string
       </span>
 
       <span className="flex items-center px-2.5 text-text/90">{routeToFile(pathname)}</span>
+
+      <button type="button" onClick={toggleTerminal} className={item} title="Toggle terminal (Ctrl+`)">
+        <VscTerminal aria-hidden /> terminal
+      </button>
 
       <div className="ml-auto flex items-stretch">
         <span aria-hidden className="flex items-center px-2.5 tabular-nums">
