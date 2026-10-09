@@ -162,7 +162,13 @@ fully restores the page (focus, scroll), and the 404 works without JS.
 
 ---
 
-## Phase 5 — 3D (react-three-fiber)
+## Phase 5 — 3D ✅ done 2026-10-09 (globe + tilt cards; desk scene skipped)
+
+Built without three.js: the globe is real links on a Fibonacci sphere,
+projected in JS (~5 KB vs ~200 KB for react-three-fiber + drei), so text
+stays crisp, focusable and crawlable. Original plan kept below for reference.
+
+### Original plan: react-three-fiber
 
 Deps: `three`, `@react-three/fiber`, `@react-three/drei` (pin exact versions).
 Only loaded on routes that use them.

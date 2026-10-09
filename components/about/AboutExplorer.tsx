@@ -14,6 +14,7 @@ import TabBar from "@/components/ui/TabBar";
 import CodeBlock from "@/components/ui/CodeBlock";
 import ContactList from "./ContactList";
 import TechStack from "./TechStack";
+import TechGlobe from "./TechGlobe";
 import ExperienceTimeline from "./ExperienceTimeline";
 
 // Terminal and game-pad icons would read as links to the terminal and the
@@ -29,12 +30,15 @@ export default function AboutExplorer({
   profile,
   experiences,
   technos,
+  usage,
 }: {
   sections: Record<AboutSection, InfoFolder[]>;
   profile: Profile;
   experiences: Experience[];
   technos: Tech[];
+  usage: Record<string, number>;
 }) {
+  const [stackView, setStackView] = useState<"globe" | "list">("globe");
   const firstFile = (section: AboutSection) => {
     const folder = sections[section][0];
     return { folderId: folder.id, fileId: folder.files[0].id };
@@ -179,7 +183,27 @@ export default function AboutExplorer({
               </dl>
             </div>
           )}
-          <TechStack technos={technos} highlight={file.techs} />
+          <div>
+            <div className="mb-4 flex items-center gap-3 text-xs" role="group" aria-label="Tech stack view">
+              <span>{"// tech-stack view:"}</span>
+              {(["globe", "list"] as const).map((v) => (
+                <button
+                  key={v}
+                  type="button"
+                  aria-pressed={stackView === v}
+                  onClick={() => setStackView(v)}
+                  className={cn("rounded px-2 py-0.5 transition-colors", stackView === v ? "bg-btn text-white" : "hover:text-white")}
+                >
+                  {v}
+                </button>
+              ))}
+            </div>
+            {stackView === "globe" ? (
+              <TechGlobe technos={technos} highlight={file.techs} usage={usage} />
+            ) : (
+              <TechStack technos={technos} highlight={file.techs} />
+            )}
+          </div>
         </div>
       </section>
     </div>
