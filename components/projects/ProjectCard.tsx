@@ -3,6 +3,7 @@ import { FaGithub } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
 import type { Project } from "@/types";
 import ProjectCover from "./ProjectCover";
+import Tilt from "./Tilt";
 
 export default function ProjectCard({
   project,
@@ -19,7 +20,7 @@ export default function ProjectCard({
         <span className="font-bold text-accent-indigo">Project {number}</span>
         {" // "}_{project.slug}
       </h2>
-      <div className="flex flex-1 flex-col overflow-hidden rounded-2xl border border-line bg-bg-input">
+      <Tilt className="flex flex-1 flex-col overflow-hidden rounded-2xl border border-line bg-bg-input">
         <Link href={`/projects/${project.slug}`} className="block border-b border-line">
           <ProjectCover project={project} className="h-40" priority={priority} />
         </Link>
@@ -56,7 +57,7 @@ export default function ProjectCard({
             )}
           </div>
         </div>
-      </div>
+      </Tilt>
     </article>
   );
 }
