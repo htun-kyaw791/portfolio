@@ -3,96 +3,21 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "@/lib/events";
 import { sfx } from "@/lib/sound";
-import { useReducedMotion } from "@/lib/useReducedMotion";
+import { usePrefs } from "@/lib/prefs";
 import BlackHole, { type BlackHoleParams } from "./BlackHole";
+import { collectPieces, spiralFrames } from "./pieces";
 
 // "rm -rf /", the Konami code or the palette: the page's own elements spiral
 // into a black hole, the screen goes dark, a fake kernel panic boots the site
 // back up, and everything is restored exactly as it was. Esc skips.
+//
+// The visitor asked for this, so it plays in full even when the OS prefers
+// reduced motion; only the site's own Motion: reduced setting tones it down.
 
 const PULL_MS = 2600;
 const LINE_MS = 120;
 
 type Phase = "idle" | "pull" | "panic" | "fade";
-
-const REPLACED = new Set(["IMG", "SVG", "CANVAS", "VIDEO", "INPUT", "TEXTAREA", "SELECT", "BUTTON", "IFRAME"]);
-
-/** Has a box you can see on its own: background, border or shadow. */
-function hasVisualBox(style: CSSStyleDeclaration) {
-  const bg = style.backgroundColor;
-  return (
-    (bg !== "rgba(0, 0, 0, 0)" && bg !== "transparent") ||
-    style.backgroundImage !== "none" ||
-    parseFloat(style.borderTopWidth) + parseFloat(style.borderLeftWidth) > 0 ||
-    style.boxShadow !== "none"
-  );
-}
-
-/**
- * The pieces that get pulled in: walking down from the frame, an element is
- * taken whole when it's small enough and either looks like a box (cards, the
- * arcade console, buttons) or has nothing further to split into. Big plain
- * wrappers are split into their children. Inline elements can't be
- * transformed, so they always travel with their block.
- */
-function collectPieces(root: Element) {
-  const vw = window.innerWidth;
-  const vh = window.innerHeight;
-  const maxArea = vw * vh * 0.33;
-  const pieces: Element[] = [];
-
-  const visit = (el: Element) => {
-    if (pieces.length >= 500 || el.closest("[data-collapse-ignore]")) return;
-    const style = getComputedStyle(el);
-    if (style.display === "none" || style.visibility === "hidden") return;
-    const r = el.getBoundingClientRect();
-    const onScreen = r.width > 0 && r.height > 0 && r.bottom > 0 && r.right > 0 && r.top < vh && r.left < vw;
-    const children = [...el.children];
-    if (style.display === "contents") return children.forEach(visit);
-    if (!onScreen) return;
-    if (style.display === "inline") return; // moves with its parent block
-
-    const blockKids = children.filter((c) => getComputedStyle(c).display !== "inline");
-    const small = r.width * r.height <= maxArea;
-    if (small && (hasVisualBox(style) || REPLACED.has(el.tagName.toUpperCase()) || blockKids.length === 0)) {
-      pieces.push(el);
-      return;
-    }
-    if (blockKids.length === 0) {
-      pieces.push(el); // a big text block: still one piece
-      return;
-    }
-    blockKids.forEach(visit);
-  };
-
-  [...root.children].forEach(visit);
-  return pieces;
-}
-
-function spiralFrames(el: Element, cx: number, cy: number): Keyframe[] {
-  const r = el.getBoundingClientRect();
-  const ex = r.left + r.width / 2;
-  const ey = r.top + r.height / 2;
-  const vx = ex - cx;
-  const vy = ey - cy;
-  const turn = (Math.atan2(vy, vx) > 0 ? 1 : -1) * (1.6 + Math.random() * 0.8);
-  const frames: Keyframe[] = [];
-  const N = 8;
-  for (let k = 0; k <= N; k++) {
-    const t = k / N;
-    const s = t * t * t; // slow start, then falls in
-    const a = s * turn * Math.PI;
-    const shrink = 1 - s;
-    const px = cx + (vx * Math.cos(a) - vy * Math.sin(a)) * shrink;
-    const py = cy + (vx * Math.sin(a) + vy * Math.cos(a)) * shrink;
-    frames.push({
-      transform: `translate(${px - ex}px, ${py - ey}px) rotate(${(a * 180) / Math.PI}deg) scale(${Math.max(0.02, 1 - s * 0.98)}, ${Math.max(0.02, 1 - s * 0.99 - (t > 0.6 ? 0.2 : 0))})`,
-      opacity: t < 0.75 ? 1 : 1 - (t - 0.75) / 0.25,
-      offset: t,
-    });
-  }
-  return frames;
-}
 
 function panicLines(count: number, theme: string) {
   return [
@@ -111,7 +36,7 @@ function panicLines(count: number, theme: string) {
 }
 
 export default function Collapse({ signal }: { signal: number }) {
-  const reduced = useReducedMotion();
+  const reduced = usePrefs().motion === "reduced";
   const [phase, setPhase] = useState<Phase>("idle");
   const [lines, setLines] = useState<string[]>([]);
   const [shown, setShown] = useState(0);
@@ -235,7 +160,9 @@ export default function Collapse({ signal }: { signal: number }) {
       className={`fixed inset-0 z-[100] transition-opacity duration-500 ${phase === "fade" ? "opacity-0" : "opacity-100"}`}
       onClick={restore}
     >
-      {phase === "pull" && <BlackHole opaque={false} stars={false} params={params} maxScale={1} className="absolute inset-0 size-full" />}
+      {phase === "pull" && (
+        <BlackHole opaque={false} stars={false} params={params} alwaysAnimate={!reduced} maxScale={1} className="absolute inset-0 size-full" />
+      )}
       {(phase === "panic" || phase === "fade") && (
         // a real console is the same colours whatever the theme
         <div className="absolute inset-0 overflow-hidden bg-black p-6 font-mono text-xs leading-6 text-[#c7c7c7] sm:p-10 sm:text-sm">

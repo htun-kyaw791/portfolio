@@ -154,6 +154,8 @@ One reusable WebGL piece, used in several places.
 3. **Hello hero option** — a tiny, slow black hole behind the name replacing
    the blurred blobs, only on desktop with full motion (setting toggle).
 4. **Event Horizon** game background (Phase 2b #5).
+5. **Intro / preloader** (added 2026-10-09): first page of each session boots
+   out of a black hole. Skipped with reduced motion; click or Esc skips.
 
 Done when: shader runs ≥ 50 fps at 1080p on an integrated GPU, the easter egg
 fully restores the page (focus, scroll), and the 404 works without JS.
