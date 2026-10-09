@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { FaFolder, FaMarkdown } from "react-icons/fa";
 import { IoMdArrowDropright } from "react-icons/io";
-import { IoGameController, IoPerson, IoTerminal } from "react-icons/io5";
+import { IoBriefcase, IoHeart, IoPerson } from "react-icons/io5";
 import type { AboutSection } from "@/lib/about";
 import type { Experience, InfoFolder, Profile, Tech } from "@/types";
 import { cn } from "@/lib/cn";
@@ -16,10 +16,12 @@ import ContactList from "./ContactList";
 import TechStack from "./TechStack";
 import ExperienceTimeline from "./ExperienceTimeline";
 
-const activityBar: { id: AboutSection; icon: typeof IoTerminal }[] = [
-  { id: "professional-info", icon: IoTerminal },
+// Terminal and game-pad icons would read as links to the terminal and the
+// arcade, so each section gets an icon for what it holds.
+const activityBar: { id: AboutSection; icon: typeof IoBriefcase }[] = [
+  { id: "professional-info", icon: IoBriefcase },
   { id: "personal-info", icon: IoPerson },
-  { id: "hobbies", icon: IoGameController },
+  { id: "hobbies", icon: IoHeart },
 ];
 
 export default function AboutExplorer({
