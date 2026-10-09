@@ -224,3 +224,16 @@ body {
 :root[data-hero="blackhole"] .hero-blob {
   display: none;
 }
+
+/* black hole intro: the frame stays hidden until the intro throws it out of
+   the hole. Failsafe: if the intro never starts (no JS), show it after 4s. */
+:root[data-intro="pending"] [data-frame] {
+  opacity: 0;
+  animation: intro-failsafe 0s 4s forwards;
+}
+
+@keyframes intro-failsafe {
+  to {
+    opacity: 1;
+  }
+}

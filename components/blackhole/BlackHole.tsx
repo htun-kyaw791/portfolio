@@ -22,6 +22,8 @@ type Props = {
   elevation?: number;
   /** Hole offset from the centre, in fractions of the canvas height. */
   center?: [number, number];
+  /** Keep animating even when the OS asks for reduced motion (only for effects the visitor explicitly asked for). */
+  alwaysAnimate?: boolean;
   /** Upper bound for pixel density; the loop lowers it on slow GPUs. */
   maxScale?: number;
   className?: string;
@@ -81,11 +83,12 @@ export default function BlackHole({
   params,
   center = [0, 0],
   elevation = 0.16,
+  alwaysAnimate = false,
   maxScale = 1.25,
   className,
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const reduced = useReducedMotion();
+  const reduced = useReducedMotion() && !alwaysAnimate;
   const colors = useThemeColors();
   const [failed, setFailed] = useState(false);
 

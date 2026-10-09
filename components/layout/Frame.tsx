@@ -5,6 +5,7 @@ import PrefsSync from "@/components/chrome/PrefsSync";
 import StatusBar from "@/components/chrome/StatusBar";
 import Toaster from "@/components/chrome/Toaster";
 import CollapseTrigger from "@/components/blackhole/CollapseTrigger";
+import IntroTrigger from "@/components/blackhole/IntroTrigger";
 import TerminalDrawer from "@/components/terminal/TerminalDrawer";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -27,6 +28,7 @@ export default async function Frame({ children }: { children: React.ReactNode })
       />
       <Toaster />
       <CollapseTrigger />
+      <IntroTrigger />
     </div>
   );
 }
