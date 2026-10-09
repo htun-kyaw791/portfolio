@@ -145,7 +145,7 @@ export default function AboutExplorer({
       {/* editor */}
       <section className="flex min-w-0 flex-1 flex-col border-line md:border-r">
         <TabBar label={`${folder.label} / ${file.label}.md`} />
-        <div className="flex-1 px-6 py-6 md:overflow-y-auto md:px-10">
+        <div tabIndex={0} role="region" aria-label="File contents" className="flex-1 px-6 py-6 md:overflow-y-auto md:px-10">
           <p className="mb-4 md:hidden">
             <span className="text-white">{`// ${section}`}</span> / {folder.label}
           </p>

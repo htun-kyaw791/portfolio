@@ -199,7 +199,10 @@ Only loaded on routes that use them.
 
 ---
 
-## Phase 7 — Quality gate (do alongside, finish here)
+## Phase 7 — Quality gate ✅ done 2026-10-09 (Lighthouse budget not automated yet)
+
+Run locally: `npm run build && npm run test:e2e` (37 Playwright tests incl. axe
+WCAG 2.1 AA on every page). CI: `.github/workflows/ci.yml`.
 
 - GitHub Action: lint, `tsc --noEmit`, `next build` (backlog #8).
 - Playwright smoke: theme persists, palette navigation, each game starts,

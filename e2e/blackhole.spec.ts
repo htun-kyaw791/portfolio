@@ -8,7 +8,8 @@ test("summon collapses the page and restores it exactly", async ({ page, console
   const overlay = page.getByRole("alertdialog", { name: /Black hole/ });
   await expect(overlay).toBeVisible();
   // the page's own elements are being animated
-  await expect.poll(() => page.evaluate(() => document.getAnimations().length)).toBeGreaterThan(10);
+  // generous timeout: parallel workers share one GPU and the code is lazy-loaded
+  await expect.poll(() => page.evaluate(() => document.getAnimations().length), { timeout: 15_000 }).toBeGreaterThan(10);
 
   await page.keyboard.press("Escape");
   await expect(overlay).toBeHidden();
@@ -47,9 +48,14 @@ test.describe("intro", () => {
   });
 
   test("click skips it", async ({ page, consoleErrors }) => {
-    await page.goto("/about-me");
-    await page.getByText("click to skip").click();
-    await expect(page.locator("html")).toHaveAttribute("data-intro", "done");
+    // don't wait for the load event: by then most of the 3s intro has played
+    await page.goto("/about-me", { waitUntil: "commit" });
+    await page.getByText("click to skip").waitFor();
+    // click by position: the busy WebGL frame loop keeps Playwright's
+    // "element is stable" check from settling before the intro ends
+    await page.mouse.click(40, 40);
+    // the intro runs ~3s on its own; ending within 1s means the click skipped it
+    await expect(page.locator("html")).toHaveAttribute("data-intro", "done", { timeout: 1_000 });
     void consoleErrors;
   });
 });
