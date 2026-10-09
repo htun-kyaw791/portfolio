@@ -211,3 +211,16 @@ body {
     transform: translateY(-8px) scale(0.98);
   }
 }
+
+/* 404: the number is slowly being pulled toward the hole */
+@keyframes drift {
+  50% {
+    transform: translateY(-6px) rotate(-2deg) scale(0.97);
+    letter-spacing: -0.04em;
+  }
+}
+
+/* hello page: the black hole hero (opt-in) replaces the blurred blobs */
+:root[data-hero="blackhole"] .hero-blob {
+  display: none;
+}

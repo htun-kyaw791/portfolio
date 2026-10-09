@@ -128,7 +128,7 @@ mid laptop, playable by keyboard and touch, high scores persist.
 
 ---
 
-## Phase 4 — Black hole 🕳️
+## Phase 4 — Black hole 🕳️ ✅ done 2026-10-09 (Event Horizon game still to do, with Phase 2b)
 
 One reusable WebGL piece, used in several places.
 
