@@ -162,7 +162,10 @@ export default function Collapse({ signal }: { signal: number }) {
     };
 
     if (reduced) {
-      startPanic();
+      // no spiralling: a still black hole for a moment, then the panic screen
+      params.current.zoom = 1;
+      setPhase("pull");
+      later(startPanic, 1600);
       return;
     }
 
