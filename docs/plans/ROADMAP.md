@@ -77,7 +77,7 @@ axe shows no new violations.
 
 ---
 
-## Phase 2 — Arcade
+## Phase 2 — Arcade (2a + games 1–3 ✅ done 2026-10-09; Bug Invaders and Event Horizon still to do)
 
 ### 2a. Game shell
 - `components/arcade/Arcade.tsx` replaces `<SnakeGame />` on `/`: the same

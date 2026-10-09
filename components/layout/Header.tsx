@@ -14,6 +14,7 @@ const navItems: NavItem[] = [
   { label: "_hello", href: "/" },
   { label: "_about-me", href: "/about-me" },
   { label: "_projects", href: "/projects" },
+  { label: "_arcade", href: "/arcade" },
 ];
 
 const contactNav: NavItem = { label: "_contact-me", href: "/contact-me" };

@@ -5,6 +5,7 @@ import { useEffect, useId, useMemo, useRef, useState } from "react";
 import {
   VscCheck,
   VscCopy,
+  VscDebugStart,
   VscFileCode,
   VscFilePdf,
   VscGithub,
@@ -13,7 +14,9 @@ import {
   VscProject,
   VscSettingsGear,
   VscSymbolColor,
+  VscUnmute,
 } from "react-icons/vsc";
+import { games } from "@/components/arcade/games";
 import { cn } from "@/lib/cn";
 import { PALETTE_OPEN, toast, type PaletteOpenDetail } from "@/lib/events";
 import { fuzzyMatch } from "@/lib/fuzzy";
@@ -25,7 +28,7 @@ import Kbd from "@/components/ui/Kbd";
 export type PaletteProject = { slug: string; name: string; description: string };
 export type PaletteLinks = { email: string; resume: string; github: string; linkedin: string };
 
-type Group = "page" | "project" | "theme" | "preference" | "link";
+type Group = "page" | "project" | "game" | "theme" | "preference" | "link";
 
 type Command = {
   id: string;
@@ -44,8 +47,8 @@ type Command = {
 
 /** Prefix → which groups are searched, like VS Code's quick open. */
 const MODES: Record<string, { groups: readonly Group[]; placeholder: string }> = {
-  "": { groups: ["page", "project", "theme", "preference", "link"], placeholder: "Search pages, projects, commands…" },
-  ">": { groups: ["preference", "theme", "link"], placeholder: "Run a command…" },
+  "": { groups: ["page", "project", "game", "theme", "preference", "link"], placeholder: "Search pages, projects, commands…" },
+  ">": { groups: ["game", "preference", "theme", "link"], placeholder: "Run a command…" },
   "@": { groups: ["project"], placeholder: "Go to project…" },
   "#": { groups: ["theme"], placeholder: "Select colour theme…" },
 };
@@ -54,6 +57,7 @@ const pages = [
   { label: "_hello", href: "/", hint: "src/hello.tsx" },
   { label: "_about-me", href: "/about-me", hint: "src/about-me.tsx" },
   { label: "_projects", href: "/projects", hint: "src/projects/index.tsx" },
+  { label: "_arcade", href: "/arcade", hint: "src/arcade.tsx" },
   { label: "_contact-me", href: "/contact-me", hint: "src/contact-me.tsx" },
 ];
 
@@ -144,6 +148,19 @@ export default function CommandPalette({ projects, links }: { projects: readonly
         icon: <VscProject />,
         run: go(`/projects/${p.slug}`),
       })),
+      ...games.map((g) => ({
+        id: `game:${g.id}`,
+        group: "game" as const,
+        label: `Play: ${g.label}`,
+        hint: g.blurb,
+        keywords: `${g.file} game arcade`,
+        icon: <VscDebugStart />,
+        run: () => {
+          // already on /arcade: a hash change switches the tab without navigating
+          if (window.location.pathname === "/arcade") window.location.hash = g.id;
+          else router.push(`/arcade#${g.id}`);
+        },
+      })),
       ...themes.map((t) => ({
         id: `theme:${t.id}`,
         group: "theme" as const,
@@ -169,6 +186,19 @@ export default function CommandPalette({ projects, links }: { projects: readonly
           const motion = NEXT_MOTION[getPrefs().motion];
           setPrefs({ motion });
           toast(`motion: ${motion}`);
+        },
+      },
+      {
+        id: "pref:sound",
+        group: "preference",
+        label: `Preferences: Sound (${prefs.sound ? "on" : "off"})`,
+        hint: "8-bit game sounds",
+        keywords: "audio mute volume",
+        icon: <VscUnmute />,
+        run: () => {
+          const sound = !getPrefs().sound;
+          setPrefs({ sound });
+          toast(`sound: ${sound ? "on" : "off"}`);
         },
       },
     ];
@@ -208,7 +238,7 @@ export default function CommandPalette({ projects, links }: { projects: readonly
       list.push({ id: "link:linkedin", group: "link", label: "Open LinkedIn profile", icon: <VscLinkExternal />, run: external(links.linkedin) });
 
     return list;
-  }, [router, projects, links, prefs.theme, prefs.motion]);
+  }, [router, projects, links, prefs.theme, prefs.motion, prefs.sound]);
 
   const { prefix, text } = parse(input);
   const mode = MODES[prefix];
