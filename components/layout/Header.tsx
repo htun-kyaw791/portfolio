@@ -4,8 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
+import { VscSearch } from "react-icons/vsc";
 import type { NavItem } from "@/types";
 import { cn } from "@/lib/cn";
+import { openPalette } from "@/lib/events";
+import Kbd from "@/components/ui/Kbd";
 
 const navItems: NavItem[] = [
   { label: "_hello", href: "/" },
@@ -66,12 +69,29 @@ export default function Header({ handle }: { handle: string }) {
               <NavLink {...item} active={isActive(item.href)} />
             </div>
           ))}
-          <div className="ml-auto border-l border-line">
+          <button
+            type="button"
+            onClick={() => openPalette()}
+            className="ml-auto flex items-center gap-3 border-l border-line px-6 text-sm transition-colors hover:text-white"
+          >
+            <VscSearch aria-hidden />
+            <span className="sr-only lg:not-sr-only">search</span>
+            <Kbd mod>K</Kbd>
+          </button>
+          <div className="border-l border-line">
             <NavLink {...contactNav} active={isActive(contactNav.href)} />
           </div>
         </nav>
 
-        {/* mobile toggle */}
+        {/* mobile */}
+        <button
+          type="button"
+          aria-label="Search"
+          onClick={() => openPalette()}
+          className="ml-auto px-4 text-lg md:hidden"
+        >
+          <VscSearch />
+        </button>
         <button
           ref={toggleRef}
           type="button"
@@ -79,7 +99,7 @@ export default function Header({ handle }: { handle: string }) {
           aria-expanded={open}
           aria-controls="mobile-menu"
           onClick={() => setOpen(!open)}
-          className="ml-auto px-6 text-xl md:hidden"
+          className="pl-2 pr-6 text-xl md:hidden"
         >
           {open ? <HiX /> : <HiMenu />}
         </button>

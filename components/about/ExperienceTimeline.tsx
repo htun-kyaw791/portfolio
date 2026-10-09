@@ -21,7 +21,7 @@ export default function ExperienceTimeline({
               aria-hidden
               className={cn(
                 "absolute -left-[29px] top-1.5 size-2.5 rounded-full",
-                e.id === activeId ? "bg-accent-orange shadow-[0_0_8px_2px_rgba(254,165,95,0.4)]" : "bg-line",
+                e.id === activeId ? "bg-accent-orange glow-accent-orange" : "bg-line",
               )}
             />
             <button type="button" onClick={() => onSelect(e.id)} className="group block text-left">

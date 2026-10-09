@@ -28,6 +28,124 @@
   --color-btn-hover: #263b50;
   --color-btn-primary: #fea55f;
   --color-btn-primary-hover: #ffac6b;
+
+  /* derived: follow whichever theme is active */
+  --color-console-from: color-mix(in oklab, color-mix(in oklab, var(--color-accent-green) 35%, var(--color-bg-deep)) 70%, transparent);
+  --color-console-to: color-mix(in oklab, var(--color-accent-green) 9%, transparent);
+  --color-bolt: color-mix(in oklab, var(--color-accent-green) 30%, var(--color-bg-deep));
+}
+
+/* glow-<colour>: soft halo in a theme colour, e.g. glow-accent-green.
+   Size via [--glow-blur:12px] [--glow-spread:4px] when needed. */
+@utility glow-* {
+  box-shadow: 0 0 var(--glow-blur, 8px) var(--glow-spread, 2px)
+    color-mix(in oklab, --value(--color-*) 50%, transparent);
+}
+
+/* ---------------------------------------------------------------------------
+   Editor themes. Night Owl is the default (the @theme values above).
+   --color-white means "strongest text", so light themes set it dark.
+   Ids must match lib/themes.ts.
+   --------------------------------------------------------------------------- */
+:root[data-theme="dracula"] {
+  --color-bg-deep: #21222c;
+  --color-bg: #282a36;
+  --color-bg-input: #1e1f29;
+  --color-line: #44475a;
+  --color-text: #8b95c4;
+  --color-text-light: #f8f8f2;
+  --color-white: #ffffff;
+  --color-accent-orange: #ffb86c;
+  --color-accent-green: #50fa7b;
+  --color-accent-coral: #ff79c6;
+  --color-accent-purple: #bd93f9;
+  --color-accent-indigo: #bd93f9;
+  --color-accent-blue: #6272a4;
+  --color-btn: #343746;
+  --color-btn-hover: #44475a;
+  --color-btn-primary: #ffb86c;
+  --color-btn-primary-hover: #ffc88f;
+}
+
+:root[data-theme="monokai"] {
+  --color-bg-deep: #1e1f1c;
+  --color-bg: #272822;
+  --color-bg-input: #22231e;
+  --color-line: #3e3d32;
+  --color-text: #a09f8c;
+  --color-text-light: #f8f8f2;
+  --color-white: #ffffff;
+  --color-accent-orange: #fd971f;
+  --color-accent-green: #a6e22e;
+  --color-accent-coral: #f92672;
+  --color-accent-purple: #ae81ff;
+  --color-accent-indigo: #66d9ef;
+  --color-accent-blue: #529aaa;
+  --color-btn: #3e3d32;
+  --color-btn-hover: #4e4d40;
+  --color-btn-primary: #fd971f;
+  --color-btn-primary-hover: #ffab4a;
+}
+
+:root[data-theme="tokyo-night"] {
+  --color-bg-deep: #16161e;
+  --color-bg: #1a1b26;
+  --color-bg-input: #16161e;
+  --color-line: #292e42;
+  --color-text: #7f87b2;
+  --color-text-light: #c0caf5;
+  --color-white: #ffffff;
+  --color-accent-orange: #ff9e64;
+  --color-accent-green: #9ece6a;
+  --color-accent-coral: #f7768e;
+  --color-accent-purple: #bb9af7;
+  --color-accent-indigo: #7aa2f7;
+  --color-accent-blue: #3d59a1;
+  --color-btn: #24283b;
+  --color-btn-hover: #2f3549;
+  --color-btn-primary: #ff9e64;
+  --color-btn-primary-hover: #ffb48a;
+}
+
+:root[data-theme="solarized-dark"] {
+  --color-bg-deep: #00212b;
+  --color-bg: #002b36;
+  --color-bg-input: #00252f;
+  --color-line: #0b4452;
+  --color-text: #8a9a9c;
+  --color-text-light: #eee8d5;
+  --color-white: #fdf6e3;
+  --color-accent-orange: #e0823d;
+  --color-accent-green: #859900;
+  --color-accent-coral: #dc322f;
+  --color-accent-purple: #d33682;
+  --color-accent-indigo: #268bd2;
+  --color-accent-blue: #2aa198;
+  --color-btn: #073642;
+  --color-btn-hover: #0d4a59;
+  --color-btn-primary: #b58900;
+  --color-btn-primary-hover: #cc9c0c;
+}
+
+:root[data-theme="github-light"] {
+  color-scheme: light;
+  --color-bg-deep: #f6f8fa;
+  --color-bg: #ffffff;
+  --color-bg-input: #f6f8fa;
+  --color-line: #d0d7de;
+  --color-text: #57606a;
+  --color-text-light: #1f2328;
+  --color-white: #1f2328;
+  --color-accent-orange: #bc4c00;
+  --color-accent-green: #1a7f37;
+  --color-accent-coral: #cf222e;
+  --color-accent-purple: #8250df;
+  --color-accent-indigo: #0550ae;
+  --color-accent-blue: #0969da;
+  --color-btn: #eaeef2;
+  --color-btn-hover: #d8dee4;
+  --color-btn-primary: #1f883d;
+  --color-btn-primary-hover: #1a7f37;
 }
 
 html,
@@ -43,7 +161,7 @@ body {
 }
 
 ::selection {
-  background: var(--color-accent-indigo);
+  background: color-mix(in oklab, var(--color-accent-indigo) 45%, var(--color-bg));
   color: var(--color-white);
 }
 
@@ -56,17 +174,40 @@ body {
   }
 }
 
+/* reduced motion: the OS setting (unless the visitor forced "full" in the
+   palette) or the in-app "reduced" preference */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  :root:not([data-motion="full"]) *,
+  :root:not([data-motion="full"]) *::before,
+  :root:not([data-motion="full"]) *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
+}
+
+:root[data-motion="reduced"] *,
+:root[data-motion="reduced"] *::before,
+:root[data-motion="reduced"] *::after {
+  transition-duration: 0.01ms !important;
+  animation-duration: 0.01ms !important;
 }
 
 /* thin IDE-like scrollbars */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--color-text) transparent;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes palette-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
 }
