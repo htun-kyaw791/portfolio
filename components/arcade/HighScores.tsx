@@ -4,7 +4,7 @@ import { useSyncExternalStore } from "react";
 import { games } from "./games";
 import { HISCORE_EVENT, readHighScore } from "./useHighScore";
 
-const UNITS: Record<string, string> = { snake: "dots", breakout: "pts", typing: "wpm" };
+const UNITS: Record<string, string> = { snake: "dots", breakout: "pts", typing: "wpm", invaders: "pts", horizon: "pts" };
 
 function subscribe(cb: () => void) {
   window.addEventListener(HISCORE_EVENT, cb);

@@ -346,7 +346,7 @@ const commandList: Command[] = [
   {
     name: "play",
     summary: "launch an arcade game",
-    usage: "<snake|breakout|typing>",
+    usage: "<game>",
     complete: () => games.map((g) => g.id),
     run: (ctx) => {
       const id = ctx.args[0];

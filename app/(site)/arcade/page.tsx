@@ -11,7 +11,7 @@ import TabBar from "@/components/ui/TabBar";
 export async function generateMetadata(): Promise<Metadata> {
   return pageMetadata({
     title: "Arcade",
-    description: "Small browser games built into the portfolio: Snake, a breakout made of my tech stack, and a typing test with real code.",
+    description: "Small browser games built into the portfolio: Snake, a breakout made of my tech stack, a typing test with real code, Bug Invaders and Event Horizon.",
     path: "/arcade",
   });
 }

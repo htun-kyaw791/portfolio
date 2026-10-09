@@ -18,6 +18,8 @@ type Props = {
   /** Apparent size; ignored when `params` is given. */
   zoom?: number;
   params?: React.RefObject<BlackHoleParams>;
+  /** Camera angle above the disk: 0.16 is the classic side view, ~1.45 looks down from above. */
+  elevation?: number;
   /** Hole offset from the centre, in fractions of the canvas height. */
   center?: [number, number];
   /** Upper bound for pixel density; the loop lowers it on slow GPUs. */
@@ -78,6 +80,7 @@ export default function BlackHole({
   zoom = 1,
   params,
   center = [0, 0],
+  elevation = 0.16,
   maxScale = 1.25,
   className,
 }: Props) {
@@ -87,9 +90,9 @@ export default function BlackHole({
   const [failed, setFailed] = useState(false);
 
   // latest props for the render loop without restarting it
-  const live = useRef({ zoom, center, opaque, stars, colors: palette(colors) });
+  const live = useRef({ zoom, center, elevation, opaque, stars, colors: palette(colors) });
   useEffect(() => {
-    live.current = { zoom, center, opaque, stars, colors: palette(colors) };
+    live.current = { zoom, center, elevation, opaque, stars, colors: palette(colors) };
   });
 
   useEffect(() => {
@@ -129,6 +132,7 @@ export default function BlackHole({
       zoom: u("uZoom"),
       center: u("uCenter"),
       look: u("uLook"),
+      elev: u("uElev"),
       hot: u("uHot"),
       mid: u("uMid"),
       cool: u("uCool"),
@@ -192,6 +196,7 @@ export default function BlackHole({
       gl.uniform1f(uni.zoom, z);
       gl.uniform2f(uni.center, l.center[0], l.center[1]);
       gl.uniform2f(uni.look, look.x, -look.y);
+      gl.uniform1f(uni.elev, l.elevation);
       gl.uniform3fv(uni.hot, l.colors.hot);
       gl.uniform3fv(uni.mid, l.colors.mid);
       gl.uniform3fv(uni.cool, l.colors.cool);

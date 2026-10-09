@@ -35,4 +35,5 @@ export const sfx = {
     setTimeout(() => blip(1320, 160, "triangle"), 180);
   },
   key: () => blip(1200, 12, "square", 0.015),
+  thrust: () => blip(90 + Math.random() * 40, 30, "sawtooth", 0.012),
 };

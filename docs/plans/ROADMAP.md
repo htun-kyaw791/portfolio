@@ -77,7 +77,7 @@ axe shows no new violations.
 
 ---
 
-## Phase 2 — Arcade (2a + games 1–3 ✅ done 2026-10-09; Bug Invaders and Event Horizon still to do)
+## Phase 2 — Arcade ✅ done 2026-10-09 (all five games; 2048/Minesweeper/Wordle remain optional)
 
 ### 2a. Game shell
 - `components/arcade/Arcade.tsx` replaces `<SnakeGame />` on `/`: the same
@@ -128,7 +128,7 @@ mid laptop, playable by keyboard and touch, high scores persist.
 
 ---
 
-## Phase 4 — Black hole 🕳️ ✅ done 2026-10-09 (Event Horizon game still to do, with Phase 2b)
+## Phase 4 — Black hole 🕳️ ✅ done 2026-10-09
 
 One reusable WebGL piece, used in several places.
 
