@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { firaCode } from "@/lib/fonts";
 import { colors } from "@/lib/colors";
 import { getProfile, siteUrl } from "@/lib/content";
+import { prefsInlineScript } from "@/lib/prefs-script";
 
 // Shared by the portfolio and the /keystatic admin, so it holds no styles or chrome;
 // those live in app/(site)/layout.tsx.
@@ -44,7 +45,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${firaCode.variable} antialiased`}>
+    // data-theme/data-motion are set by the inline script before React hydrates
+    <html lang="en" className={`${firaCode.variable} antialiased`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: prefsInlineScript }} />
+      </head>
       <body>{children}</body>
     </html>
   );

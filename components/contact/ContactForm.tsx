@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 export type ContactValues = { name: string; email: string; message: string };
 
 const inputClass =
-  "w-full rounded-lg border border-line bg-bg-input px-4 py-2.5 text-text-light outline-none transition-shadow focus:border-text focus:shadow-[0_0_0_2px_rgba(96,123,150,0.3)]";
+  "w-full rounded-lg border border-line bg-bg-input px-4 py-2.5 text-text-light outline-none transition-shadow focus:border-text focus:ring-2 focus:ring-text/30";
 
 export default function ContactForm({
   email,

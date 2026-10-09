@@ -18,7 +18,7 @@ export default async function HelloPage() {
         <p className="mt-6 max-w-lg text-sm leading-6">{site.summary}</p>
         {site.availability && (
           <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-accent-green/30 bg-accent-green/10 px-3 py-1 text-xs text-accent-green">
-            <span aria-hidden className="size-2 rounded-full bg-accent-green shadow-[0_0_6px_2px_rgba(67,217,173,0.5)]" />
+            <span aria-hidden className="size-2 rounded-full bg-accent-green glow-accent-green [--glow-blur:6px]" />
             {site.availability}
           </p>
         )}

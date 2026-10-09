@@ -59,7 +59,7 @@ function Key({ dir, onPress, children }: { dir: Dir; onPress: (d: Dir) => void; 
 }
 
 function Bolt({ className }: { className: string }) {
-  return <span className={`absolute size-4 rounded-full bg-[radial-gradient(#196c6a,#114b4a)] shadow-inner ${className}`} />;
+  return <span className={`absolute size-4 rounded-full bg-[radial-gradient(var(--color-bolt),var(--color-bg-deep))] shadow-inner ${className}`} />;
 }
 
 export default function SnakeGame() {
@@ -103,7 +103,7 @@ export default function SnakeGame() {
   }, [game.status, start, turn]);
 
   return (
-    <div className="relative flex w-[510px] gap-6 rounded-lg border border-black/30 bg-[linear-gradient(150deg,rgba(23,85,83,0.7)_1.7%,rgba(67,217,173,0.09)_81.82%)] p-8 shadow-[inset_0_2px_0_rgba(255,255,255,0.3)] backdrop-blur-2xl">
+    <div className="relative flex w-[510px] gap-6 rounded-lg border border-black/30 bg-[linear-gradient(150deg,var(--color-console-from)_1.7%,var(--color-console-to)_81.82%)] p-8 shadow-[inset_0_2px_0_rgba(255,255,255,0.3)] backdrop-blur-2xl">
       <Bolt className="left-3 top-3" />
       <Bolt className="right-3 top-3" />
       <Bolt className="bottom-3 left-3" />
@@ -111,7 +111,7 @@ export default function SnakeGame() {
 
       {/* board */}
       <div
-        className="relative grid h-[405px] w-[240px] rounded-lg bg-bg/85 shadow-[inset_1px_5px_11px_rgba(2,18,27,0.71)]"
+        className="relative grid h-[405px] w-[240px] rounded-lg bg-bg/85 shadow-[inset_1px_5px_11px_color-mix(in_oklab,var(--color-bg-deep)_70%,transparent)]"
         style={{ gridTemplateColumns: `repeat(${COLS}, 1fr)`, gridTemplateRows: `repeat(${ROWS}, 1fr)` }}
       >
         {game.snake.map((s, i) => (
@@ -124,7 +124,7 @@ export default function SnakeGame() {
         {game.status !== "won" && (
           <span
             style={{ gridColumn: game.food.x + 1, gridRow: game.food.y + 1 }}
-            className="rounded-full bg-accent-green shadow-[0_0_12px_4px_rgba(67,217,173,0.5)]"
+            className="rounded-full bg-accent-green glow-accent-green [--glow-blur:12px] [--glow-spread:4px]"
           />
         )}
 
@@ -162,7 +162,7 @@ export default function SnakeGame() {
               key={i}
               className={cn(
                 "size-2.5 rounded-full bg-accent-green",
-                i < FOOD_GOAL - game.eaten ? "shadow-[0_0_8px_2px_rgba(67,217,173,0.5)]" : "opacity-20",
+                i < FOOD_GOAL - game.eaten ? "glow-accent-green" : "opacity-20",
               )}
             />
           ))}
