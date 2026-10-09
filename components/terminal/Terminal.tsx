@@ -3,6 +3,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
+import { navTypes } from "@/lib/nav";
 import { readStorage, writeStorage } from "@/lib/storage";
 import { commandNames, commands, cwd, resolveCommand } from "./commands";
 import Run, { RunContext } from "./Run";
@@ -161,7 +162,7 @@ export default function Terminal({
         history: [...history, trimmed],
         print,
         clear: () => setLines([]),
-        navigate: (href) => router.push(href),
+        navigate: (href) => router.push(href, { transitionTypes: navTypes(window.location.pathname, href) }),
         close: () => (onClose ? onClose() : print("exit: this is the full-screen terminal, try `cd ~`", "muted")),
         setMode,
       };

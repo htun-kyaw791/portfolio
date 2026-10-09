@@ -3,6 +3,7 @@ import { pageMetadata } from "@/lib/seo";
 import { buildAboutSections } from "@/lib/about";
 import { getAbout, getExperiences, getProfile, getProjects, getTechnos } from "@/lib/content";
 import AboutExplorer from "@/components/about/AboutExplorer";
+import PageTransition from "@/components/layout/PageTransition";
 
 export async function generateMetadata(): Promise<Metadata> {
   const [site, experiences] = await Promise.all([getProfile(), getExperiences()]);
@@ -26,12 +27,14 @@ export default async function AboutPage() {
   const usage: Record<string, number> = {};
   for (const p of projects) for (const t of p.technos) usage[t] = (usage[t] ?? 0) + 1;
   return (
-    <AboutExplorer
-      sections={buildAboutSections(profile, about, experiences)}
-      profile={profile}
-      experiences={experiences}
-      technos={technos}
-      usage={usage}
-    />
+    <PageTransition>
+      <AboutExplorer
+        sections={buildAboutSections(profile, about, experiences)}
+        profile={profile}
+        experiences={experiences}
+        technos={technos}
+        usage={usage}
+      />
+    </PageTransition>
   );
 }

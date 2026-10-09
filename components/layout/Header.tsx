@@ -8,6 +8,7 @@ import { VscSearch } from "react-icons/vsc";
 import type { NavItem } from "@/types";
 import { cn } from "@/lib/cn";
 import { openPalette } from "@/lib/events";
+import { navTypes } from "@/lib/nav";
 import Kbd from "@/components/ui/Kbd";
 
 const navItems: NavItem[] = [
@@ -19,10 +20,11 @@ const navItems: NavItem[] = [
 
 const contactNav: NavItem = { label: "_contact-me", href: "/contact-me" };
 
-function NavLink({ href, label, active }: { href: string; label: string; active: boolean }) {
+function NavLink({ href, label, active, from }: { href: string; label: string; active: boolean; from: string }) {
   return (
     <Link
       href={href}
+      transitionTypes={navTypes(from, href)}
       aria-current={active ? "page" : undefined}
       className={cn(
         "flex h-full items-center border-b-[3px] px-8 transition-colors hover:text-white",
@@ -57,7 +59,8 @@ export default function Header({ handle }: { handle: string }) {
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   return (
-    <header className="relative border-b border-line">
+    // named so it stays put while page content slides (see globals.css)
+    <header className="relative border-b border-line [view-transition-name:site-header]">
       <div className="flex h-14">
         <Link href="/" className="flex flex-1 items-center px-6 md:w-[311px] md:flex-none md:border-r md:border-line">
           {handle}
@@ -67,7 +70,7 @@ export default function Header({ handle }: { handle: string }) {
         <nav aria-label="Main" className="hidden flex-1 md:flex">
           {navItems.map((item) => (
             <div key={item.href} className="border-r border-line">
-              <NavLink {...item} active={isActive(item.href)} />
+              <NavLink {...item} active={isActive(item.href)} from={pathname} />
             </div>
           ))}
           <button
@@ -80,7 +83,7 @@ export default function Header({ handle }: { handle: string }) {
             <Kbd mod>K</Kbd>
           </button>
           <div className="border-l border-line">
-            <NavLink {...contactNav} active={isActive(contactNav.href)} />
+            <NavLink {...contactNav} active={isActive(contactNav.href)} from={pathname} />
           </div>
         </nav>
 

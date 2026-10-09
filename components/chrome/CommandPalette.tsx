@@ -22,6 +22,7 @@ import { games } from "@/components/arcade/games";
 import { cn } from "@/lib/cn";
 import { PALETTE_OPEN, summonBlackHole, toast, toggleTerminal, type PaletteOpenDetail } from "@/lib/events";
 import { fuzzyMatch } from "@/lib/fuzzy";
+import { navTypes } from "@/lib/nav";
 import { useHotkey } from "@/lib/hotkeys";
 import { applyPrefs, getPrefs, setPrefs, usePrefs, type MotionPref } from "@/lib/prefs";
 import { themes } from "@/lib/themes";
@@ -130,7 +131,7 @@ export default function CommandPalette({ projects, links }: { projects: readonly
   }, [open]);
 
   const commands = useMemo<Command[]>(() => {
-    const go = (href: string) => () => router.push(href);
+    const go = (href: string) => () => router.push(href, { transitionTypes: navTypes(window.location.pathname, href) });
     const external = (href: string) => () => window.open(href, "_blank", "noopener,noreferrer");
 
     const list: Command[] = [
@@ -223,6 +224,19 @@ export default function CommandPalette({ projects, links }: { projects: readonly
         run: () => setTimeout(summonBlackHole, 150),
       },
       {
+        id: "pref:crt",
+        group: "preference",
+        label: `Preferences: CRT mode (${prefs.crt ? "on" : "off"})`,
+        hint: "scanlines and phosphor glow",
+        keywords: "retro monitor scanline vintage",
+        icon: <VscSettingsGear />,
+        run: () => {
+          const crt = !getPrefs().crt;
+          setPrefs({ crt });
+          toast(`crt: ${crt ? "on" : "off"}`);
+        },
+      },
+      {
         id: "pref:sound",
         group: "preference",
         label: `Preferences: Sound (${prefs.sound ? "on" : "off"})`,
@@ -272,7 +286,7 @@ export default function CommandPalette({ projects, links }: { projects: readonly
       list.push({ id: "link:linkedin", group: "link", label: "Open LinkedIn profile", icon: <VscLinkExternal />, run: external(links.linkedin) });
 
     return list;
-  }, [router, projects, links, prefs.theme, prefs.motion, prefs.sound, prefs.hero]);
+  }, [router, projects, links, prefs.theme, prefs.motion, prefs.sound, prefs.hero, prefs.crt]);
 
   const { prefix, text } = parse(input);
   const mode = MODES[prefix];

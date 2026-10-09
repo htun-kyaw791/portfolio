@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 import { findMeAlso, getProfile } from "@/lib/content";
 import ContactExplorer from "@/components/contact/ContactExplorer";
+import PageTransition from "@/components/layout/PageTransition";
 
 export async function generateMetadata(): Promise<Metadata> {
   const site = await getProfile();
@@ -14,5 +15,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ContactPage() {
   const profile = await getProfile();
-  return <ContactExplorer profile={profile} links={findMeAlso(profile)} />;
+  return (
+    <PageTransition>
+      <ContactExplorer profile={profile} links={findMeAlso(profile)} />
+    </PageTransition>
+  );
 }

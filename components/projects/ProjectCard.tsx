@@ -15,13 +15,13 @@ export default function ProjectCard({
   priority?: boolean;
 }) {
   return (
-    <article className="flex min-w-0 flex-col">
+    <article className="reveal flex min-w-0 flex-col">
       <h2 className="mb-4 truncate text-sm">
         <span className="font-bold text-accent-indigo">Project {number}</span>
         {" // "}_{project.slug}
       </h2>
       <Tilt className="flex flex-1 flex-col overflow-hidden rounded-2xl border border-line bg-bg-input">
-        <Link href={`/projects/${project.slug}`} className="block border-b border-line">
+        <Link href={`/projects/${project.slug}`} transitionTypes={["nav-forward"]} className="block border-b border-line">
           <ProjectCover project={project} className="h-40" priority={priority} />
         </Link>
         <div className="flex flex-1 flex-col gap-4 p-6">
@@ -41,6 +41,7 @@ export default function ProjectCard({
           <div className="mt-auto flex items-center gap-3 pt-2">
             <Link
               href={`/projects/${project.slug}`}
+              transitionTypes={["nav-forward"]}
               className="rounded-lg bg-btn px-4 py-2.5 text-sm text-white transition-colors hover:bg-btn-hover"
             >
               view-project
