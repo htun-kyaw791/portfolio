@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { getProjects, siteUrl } from "@/lib/content";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const pages = ["", "/about-me", "/projects", "/contact-me"].map((path) => ({
+  const pages = ["", "/about-me", "/projects", "/arcade", "/contact-me"].map((path) => ({
     url: `${siteUrl}${path}`,
     changeFrequency: "monthly" as const,
     priority: path === "" ? 1 : 0.8,

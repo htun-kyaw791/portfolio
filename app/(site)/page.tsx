@@ -1,9 +1,9 @@
 import Link from "next/link";
-import SnakeGame from "@/components/hello/SnakeGame";
-import { getProfile } from "@/lib/content";
+import Arcade from "@/components/arcade/Arcade";
+import { getProfile, getTechnos } from "@/lib/content";
 
 export default async function HelloPage() {
-  const site = await getProfile();
+  const [site, technos] = await Promise.all([getProfile(), getTechnos()]);
 
   return (
     <section className="relative flex flex-1 items-center justify-center gap-24 overflow-y-auto overflow-x-hidden px-6 py-10 lg:justify-between lg:px-[8%]">
@@ -34,6 +34,12 @@ export default async function HelloPage() {
 
         <div className="mt-12 space-y-2 text-sm md:text-base">
           <p className="hidden lg:block">{"// complete the game to continue"}</p>
+          <p className="lg:hidden">
+            {"// bored? "}
+            <Link href="/arcade" className="text-accent-orange hover:underline">
+              play the arcade
+            </Link>
+          </p>
           {site.github && (
             <>
               <p>{"// find my profile on Github:"}</p>
@@ -68,8 +74,8 @@ export default async function HelloPage() {
         </div>
       </div>
 
-      <div className="relative z-10 hidden lg:block">
-        <SnakeGame />
+      <div className="relative z-10 hidden w-[510px] lg:block">
+        <Arcade technos={technos.map(({ title, type }) => ({ title, type }))} />
       </div>
     </section>
   );
