@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Arcade from "@/components/arcade/Arcade";
+import HeroBlackHole from "@/components/blackhole/HeroBlackHole";
 import { getProfile, getTechnos } from "@/lib/content";
 
 export default async function HelloPage() {
@@ -8,8 +9,9 @@ export default async function HelloPage() {
   return (
     <section className="relative flex flex-1 items-center justify-center gap-24 overflow-y-auto overflow-x-hidden px-6 py-10 lg:justify-between lg:px-[8%]">
       {/* background blurs */}
-      <div aria-hidden className="pointer-events-none absolute right-[8%] top-[20%] size-80 rounded-full bg-accent-green/40 blur-[120px]" />
-      <div aria-hidden className="pointer-events-none absolute bottom-[15%] right-[25%] size-80 rounded-full bg-accent-indigo/50 blur-[120px]" />
+      <HeroBlackHole />
+      <div aria-hidden className="hero-blob pointer-events-none absolute right-[8%] top-[20%] size-80 rounded-full bg-accent-green/40 blur-[120px]" />
+      <div aria-hidden className="hero-blob pointer-events-none absolute bottom-[15%] right-[25%] size-80 rounded-full bg-accent-indigo/50 blur-[120px]" />
 
       <div className="relative z-10 max-w-xl">
         <p className="text-lg text-text-light">Hi all. I am</p>

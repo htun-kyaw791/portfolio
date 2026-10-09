@@ -44,6 +44,8 @@ function subscribeMinute(cb: () => void) {
   return () => clearInterval(id);
 }
 
+const noop = () => () => {};
+
 /** Owner's local time; empty during SSR so there is no hydration mismatch. */
 function useYangonTime() {
   return useSyncExternalStore(subscribeMinute, () => clockFormat.format(new Date()), () => "");
@@ -57,6 +59,8 @@ export default function StatusBar({ repoHref, availability }: { repoHref: string
   const prefs = usePrefs();
   const { ln, col } = useCursor();
   const time = useYangonTime();
+  // the 404 page is prerendered once for every unknown URL, so the path is only known after hydration
+  const hydrated = useSyncExternalStore(noop, () => true, () => false);
 
   return (
     <div className="hidden h-6 shrink-0 items-stretch border-t border-line bg-bg-deep text-[11px] md:flex">
@@ -84,7 +88,7 @@ export default function StatusBar({ repoHref, availability }: { repoHref: string
         <VscError aria-hidden /> 0 <VscWarning aria-hidden /> 0
       </span>
 
-      <span className="flex items-center px-2.5 text-text/90">{routeToFile(pathname)}</span>
+      <span className="flex items-center px-2.5 text-text/90">{hydrated ? routeToFile(pathname) : ""}</span>
 
       <button type="button" onClick={toggleTerminal} className={item} title="Toggle terminal (Ctrl+`)">
         <VscTerminal aria-hidden /> terminal

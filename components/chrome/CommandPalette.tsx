@@ -6,6 +6,7 @@ import {
   VscCheck,
   VscCopy,
   VscDebugStart,
+  VscFlame,
   VscFileCode,
   VscFilePdf,
   VscGithub,
@@ -19,7 +20,7 @@ import {
 } from "react-icons/vsc";
 import { games } from "@/components/arcade/games";
 import { cn } from "@/lib/cn";
-import { PALETTE_OPEN, toast, toggleTerminal, type PaletteOpenDetail } from "@/lib/events";
+import { PALETTE_OPEN, summonBlackHole, toast, toggleTerminal, type PaletteOpenDetail } from "@/lib/events";
 import { fuzzyMatch } from "@/lib/fuzzy";
 import { useHotkey } from "@/lib/hotkeys";
 import { applyPrefs, getPrefs, setPrefs, usePrefs, type MotionPref } from "@/lib/prefs";
@@ -29,7 +30,7 @@ import Kbd from "@/components/ui/Kbd";
 export type PaletteProject = { slug: string; name: string; description: string };
 export type PaletteLinks = { email: string; resume: string; github: string; linkedin: string };
 
-type Group = "page" | "project" | "game" | "theme" | "preference" | "link";
+type Group = "page" | "project" | "game" | "theme" | "preference" | "link" | "fun";
 
 type Command = {
   id: string;
@@ -48,8 +49,8 @@ type Command = {
 
 /** Prefix → which groups are searched, like VS Code's quick open. */
 const MODES: Record<string, { groups: readonly Group[]; placeholder: string }> = {
-  "": { groups: ["page", "project", "game", "theme", "preference", "link"], placeholder: "Search pages, projects, commands…" },
-  ">": { groups: ["game", "preference", "theme", "link"], placeholder: "Run a command…" },
+  "": { groups: ["page", "project", "game", "theme", "preference", "link", "fun"], placeholder: "Search pages, projects, commands…" },
+  ">": { groups: ["game", "preference", "theme", "link", "fun"], placeholder: "Run a command…" },
   "@": { groups: ["project"], placeholder: "Go to project…" },
   "#": { groups: ["theme"], placeholder: "Select colour theme…" },
 };
@@ -200,6 +201,28 @@ export default function CommandPalette({ projects, links }: { projects: readonly
         run: () => toggleTerminal(),
       },
       {
+        id: "pref:hero",
+        group: "preference",
+        label: `Preferences: Hero background (${prefs.hero === "blackhole" ? "black hole" : "blobs"})`,
+        hint: "hello page, desktop only",
+        keywords: "background blackhole space",
+        icon: <VscSettingsGear />,
+        run: () => {
+          const hero = getPrefs().hero === "blackhole" ? "blobs" : "blackhole";
+          setPrefs({ hero });
+          toast(`hero: ${hero === "blackhole" ? "black hole" : "blobs"}`);
+        },
+      },
+      {
+        id: "fun:blackhole",
+        group: "fun",
+        label: "Summon black hole",
+        hint: "don't worry, it gives everything back",
+        keywords: "easter egg collapse rm -rf",
+        icon: <VscFlame />,
+        run: () => setTimeout(summonBlackHole, 150),
+      },
+      {
         id: "pref:sound",
         group: "preference",
         label: `Preferences: Sound (${prefs.sound ? "on" : "off"})`,
@@ -249,7 +272,7 @@ export default function CommandPalette({ projects, links }: { projects: readonly
       list.push({ id: "link:linkedin", group: "link", label: "Open LinkedIn profile", icon: <VscLinkExternal />, run: external(links.linkedin) });
 
     return list;
-  }, [router, projects, links, prefs.theme, prefs.motion, prefs.sound]);
+  }, [router, projects, links, prefs.theme, prefs.motion, prefs.sound, prefs.hero]);
 
   const { prefix, text } = parse(input);
   const mode = MODES[prefix];

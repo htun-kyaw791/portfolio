@@ -10,15 +10,18 @@ import { DEFAULT_THEME, getTheme, isThemeId, type ThemeId } from "./themes";
 // this module keeps them in sync afterwards.
 
 export type MotionPref = "auto" | "reduced" | "full";
+export type HeroPref = "blobs" | "blackhole";
 
 export type Prefs = {
   theme: ThemeId;
   motion: MotionPref;
   sound: boolean;
   crt: boolean;
+  /** Hello page background. */
+  hero: HeroPref;
 };
 
-export const defaultPrefs: Prefs = { theme: DEFAULT_THEME, motion: "auto", sound: false, crt: false };
+export const defaultPrefs: Prefs = { theme: DEFAULT_THEME, motion: "auto", sound: false, crt: false, hero: "blobs" };
 
 function sanitize(raw: Partial<Prefs> | null): Prefs {
   const p = { ...defaultPrefs, ...raw };
@@ -27,6 +30,7 @@ function sanitize(raw: Partial<Prefs> | null): Prefs {
     motion: p.motion === "reduced" || p.motion === "full" ? p.motion : "auto",
     sound: p.sound === true,
     crt: p.crt === true,
+    hero: p.hero === "blackhole" ? "blackhole" : "blobs",
   };
 }
 
@@ -46,6 +50,7 @@ export function applyPrefs(p: Prefs) {
   else root.dataset.motion = p.motion;
   if (p.crt) root.dataset.crt = "";
   else delete root.dataset.crt;
+  root.dataset.hero = p.hero;
   document.querySelector('meta[name="theme-color"]')?.setAttribute("content", getTheme(p.theme).bg);
 }
 
